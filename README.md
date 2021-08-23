@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/katlehojnr3250/kingpinssdp.svg?branch=master)](https://app.travis-ci.com/katlehojnr3250/kingpinssdp)
+
 # kingpinssdp
 
 A new Flutter project.
