@@ -1,5 +1,7 @@
 [![Build Status](https://app.travis-ci.com/katlehojnr3250/kingpinssdp.svg?branch=master)](https://app.travis-ci.com/katlehojnr3250/kingpinssdp)
 
+[![codecov](https://codecov.io/gh/katlehojnr3250/kingpinssdp/branch/main/graph/badge.svg?token=GxQ9MLiru0)](https://codecov.io/gh/katlehojnr3250/kingpinssdp)
+
 # kingpinssdp
 
 A new Flutter project.
