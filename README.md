@@ -1,6 +1,6 @@
 [![Build Status](https://app.travis-ci.com/KINGPINS-WITS/kingpinssdp.svg?branch=master)](https://app.travis-ci.com/KINGPINS-WITS/kingpinssdp)
 
-[![codecov](https://codecov.io/gh/KINGPINS-WITS/kingpinssdp/branch/main/graph/badge.svg?token=GxQ9MLiru0)](https://codecov.io/gh/KINGPINS-WITS/kingpinssdp)
+[![codecov](https://codecov.io/gh/KINGPINS-WITS/kingpinssdp/branch/master/graph/badge.svg?token=TMbO73GtTs)](https://codecov.io/gh/KINGPINS-WITS/kingpinssdp)
 
 # kingpinssdp
 
