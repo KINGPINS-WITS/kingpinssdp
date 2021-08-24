@@ -3,7 +3,6 @@
 [![codecov](https://codecov.io/gh/KINGPINS-WITS/kingpinssdp/branch/master/graph/badge.svg?token=TMbO73GtTs)](https://codecov.io/gh/KINGPINS-WITS/kingpinssdp)
 
 # kingpinssdp
-
 A new Flutter project.
 
 ## Getting Started
