@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:kingpinssdp/current_user.dart';
+import 'package:kingpinssdp/signup.dart';
 
 import '../homepage.dart';
 
@@ -201,6 +202,32 @@ class LoginPageState extends State<LoginPage>{
                                 ),
                               ),
                             ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical:15, horizontal:0 ),
+                      child: Container(
+                        height: 60,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.blue[900],
+                        ),
+                        child: TextButton(
+                          key: Key("signupButton"),
+                          onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignupPage()),
+                              );
+
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: const TextStyle(fontSize: 22, color: Colors.white, height: 1.5),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
