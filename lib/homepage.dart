@@ -4,8 +4,6 @@ import 'package:kingpinssdp/Controllers/custom_tab.dart';
 import 'package:kingpinssdp/Controllers/custom_tab_bar.dart';
 import 'package:kingpinssdp/classes/content_view.dart';
 
-
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -26,148 +24,225 @@ class _HomePageState extends State<HomePage>
       tab: CustomTab(title: 'PRODUCTS'),
       content: Center(
           child: Column(
-            children: [
-              Row(children: [
-                SizedBox(
-                  height: 50,
-                  width: 200,
-                ),
-                Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          right: BorderSide(
-                            //                   <--- left side
-                            color: Color.fromARGB(256, 26, 35, 16),
-                            width: 1.5,
-                          )),
-                    ),
-                    child: FlatButton(
-                      color: Colors.grey[350],
-                      focusColor: Colors.blue,
-                      hoverColor: Colors.blue,
-                      splashColor: Colors.blue,
-                      onPressed: () {},
-                      child: Text(
-                        'STATIONERY',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      padding: EdgeInsets.only(right: 25, left: 25),
-                    )),
-                Container(
-                    decoration: BoxDecoration(
-
-                      border: Border(
-                          right: BorderSide(
-                            //                   <--- left side
-                            color: Color.fromARGB(256, 26, 35, 16),
-                            width: 1.5,
-                          )),
-                    ),
-
-                    child: FlatButton(
-                      color: Colors.grey[350],
-                      focusColor: Colors.blue,
-                      hoverColor: Colors.blue,
-                      splashColor: Colors.blue,
-                      onPressed: () {},
-                      child: Text(
-                        'OFFICE CONSUMABLES',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      padding: EdgeInsets.only(right: 25, left: 25),
-                    )),
-                Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          right: BorderSide(
-                            //                   <--- left side
-                            color: Color.fromARGB(256, 26, 35, 16),
-                            width: 1.5,
-                          )),
-                    ),
-                    child: FlatButton(
-                      color: Colors.grey[350],
-                      focusColor: Colors.blue,
-                      hoverColor: Colors.blue,
-                      splashColor: Colors.blue,
-                      onPressed: () {},
-                      child: Text(
-                        'GADGETS',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      padding: EdgeInsets.only(right: 25, left: 25),
-                    )),
-                Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          right: BorderSide(
-                            //                   <--- left side
-                            color: Color.fromARGB(256, 26, 35, 16),
-                            width: 1.5,
-                          )),
-                    ),
-                    child: FlatButton(
-                      color: Colors.grey[350],
-                      focusColor: Colors.blue,
-                      hoverColor: Colors.blue,
-                      splashColor: Colors.blue,
-                      onPressed: () {},
-                      child: Text(
-                        'PERIPHERALS',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      padding: EdgeInsets.only(right: 25, left: 25),
-                    )),
-                Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          right: BorderSide(
-                            //                   <--- left side
-                            color: Color.fromARGB(256, 26, 35, 16),
-                            width: 1.5,
-                          )),
-                    ),
-                    child: FlatButton(
-                      color: Colors.grey[350],
-                      focusColor: Colors.blue,
-                      hoverColor: Colors.blue,
-                      splashColor: Colors.blue,
-                      onPressed: () {},
-                      child: Text(
-                        'FURNITURE',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      padding: EdgeInsets.only(right: 25, left: 25),
-                    )),
-                Container(
-                    decoration: BoxDecoration(),
-                    child: FlatButton(
-                      color: Colors.grey[350],
-                      focusColor: Colors.blue,
-                      hoverColor: Colors.blue,
-                      splashColor: Colors.blue,
-                      onPressed: () {},
-                      child: Text(
-                        'BOOKS',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      padding: EdgeInsets.only(right: 25, left: 25),
-                    )),
-              ]),
-              Container(
-                height: 400,
+        children: [
+          Row(children: [
+            SizedBox(
+              height: 50,
+              width: 200,
+            ),
+            Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("products1.jpg"), fit: BoxFit.fill),
+                  border: Border(
+                      right: BorderSide(
+                    //                   <--- left side
+                    color: Color.fromARGB(256, 26, 35, 16),
+                    width: 1.5,
+                  )),
                 ),
-              ),
-            ],
-          )),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'STATIONERY',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                    //                   <--- left side
+                    color: Color.fromARGB(256, 26, 35, 16),
+                    width: 1.5,
+                  )),
+                ),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'OFFICE CONSUMABLES',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                    //                   <--- left side
+                    color: Color.fromARGB(256, 26, 35, 16),
+                    width: 1.5,
+                  )),
+                ),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'GADGETS',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                    //                   <--- left side
+                    color: Color.fromARGB(256, 26, 35, 16),
+                    width: 1.5,
+                  )),
+                ),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'PERIPHERALS',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                    //                   <--- left side
+                    color: Color.fromARGB(256, 26, 35, 16),
+                    width: 1.5,
+                  )),
+                ),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'FURNITURE',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+            Container(
+                decoration: BoxDecoration(),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'BOOKS',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+          ]),
+          Container(
+            height: 400,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("products1.jpg"), fit: BoxFit.fill),
+            ),
+          ),
+        ],
+      )),
     ),
     ContentView(
       tab: CustomTab(title: 'SERVICES'),
-      content:
-      Center(child: Container(color: Colors.blue, width: 100, height: 100)),
+      content: Center(
+          child: Column(
+        children: [
+          Row(children: [
+            SizedBox(
+              height: 50,
+              width: 400,
+            ),
+            Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                    //                   <--- left side
+                    color: Color.fromARGB(256, 26, 35, 16),
+                    width: 1.5,
+                  )),
+                ),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'BOOK A TUTOR',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                    //                   <--- left side
+                    color: Color.fromARGB(256, 26, 35, 16),
+                    width: 1.5,
+                  )),
+                ),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'LAPTOP REPAIR',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                    //                   <--- left side
+                    color: Color.fromARGB(256, 26, 35, 16),
+                    width: 1.5,
+                  )),
+                ),
+                child: FlatButton(
+                  color: Colors.grey[350],
+                  focusColor: Colors.blue,
+                  hoverColor: Colors.blue,
+                  splashColor: Colors.blue,
+                  onPressed: () {},
+                  child: Text(
+                    'MENTORSHIP',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.only(right: 25, left: 25),
+                )),
+          ]),
+          Container(
+            height: 400,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("services1.png"), fit: BoxFit.fill),
+            ),
+          ),
+        ],
+      )),
     ),
   ];
 
@@ -199,7 +274,7 @@ class _HomePageState extends State<HomePage>
   Widget mobileView() {
     return Padding(
       padding:
-      EdgeInsets.only(left: screenWidth * 0.05, right: screenWidth * 0.05),
+          EdgeInsets.only(left: screenWidth * 0.05, right: screenWidth * 0.05),
       child: Container(
         width: screenWidth,
         child: Column(
@@ -223,11 +298,11 @@ class _HomePageState extends State<HomePage>
         children: [Container(height: screenHeight * 0.1)] +
             contentViews
                 .map((e) => Container(
-              child: ListTile(
-                title: Text(e.tab.title),
-                onTap: () {},
-              ),
-            ))
+                      child: ListTile(
+                        title: Text(e.tab.title),
+                        onTap: () {},
+                      ),
+                    ))
                 .toList(),
       ),
     );
