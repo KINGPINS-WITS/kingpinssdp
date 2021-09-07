@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage>
           Row(children: [
             SizedBox(
               height: 50,
-              width: 200,
+              width: 180,
             ),
             Container(
                 decoration: BoxDecoration(
@@ -49,49 +49,7 @@ class _HomePageState extends State<HomePage>
                     'STATIONERY',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  padding: EdgeInsets.only(right: 25, left: 25),
-                )),
-            Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                      right: BorderSide(
-                    //                   <--- left side
-                    color: Color.fromARGB(256, 26, 35, 16),
-                    width: 1.5,
-                  )),
-                ),
-                child: FlatButton(
-                  color: Colors.grey[350],
-                  focusColor: Colors.blue,
-                  hoverColor: Colors.blue,
-                  splashColor: Colors.blue,
-                  onPressed: () {},
-                  child: Text(
-                    'OFFICE CONSUMABLES',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  padding: EdgeInsets.only(right: 25, left: 25),
-                )),
-            Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                      right: BorderSide(
-                    //                   <--- left side
-                    color: Color.fromARGB(256, 26, 35, 16),
-                    width: 1.5,
-                  )),
-                ),
-                child: FlatButton(
-                  color: Colors.grey[350],
-                  focusColor: Colors.blue,
-                  hoverColor: Colors.blue,
-                  splashColor: Colors.blue,
-                  onPressed: () {},
-                  child: Text(
-                    'GADGETS',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  padding: EdgeInsets.only(right: 25, left: 25),
+                  // padding: EdgeInsets.only(right: 25, left: 25),
                 )),
             Container(
                 decoration: BoxDecoration(
@@ -112,28 +70,7 @@ class _HomePageState extends State<HomePage>
                     'PERIPHERALS',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  padding: EdgeInsets.only(right: 25, left: 25),
-                )),
-            Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                      right: BorderSide(
-                    //                   <--- left side
-                    color: Color.fromARGB(256, 26, 35, 16),
-                    width: 1.5,
-                  )),
-                ),
-                child: FlatButton(
-                  color: Colors.grey[350],
-                  focusColor: Colors.blue,
-                  hoverColor: Colors.blue,
-                  splashColor: Colors.blue,
-                  onPressed: () {},
-                  child: Text(
-                    'FURNITURE',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  padding: EdgeInsets.only(right: 25, left: 25),
+                  //  padding: EdgeInsets.only(right: 25, left: 25),
                 )),
             Container(
                 decoration: BoxDecoration(),
@@ -147,14 +84,14 @@ class _HomePageState extends State<HomePage>
                     'BOOKS',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  padding: EdgeInsets.only(right: 25, left: 25),
+                  // padding: EdgeInsets.only(right: 25, left: 25),
                 )),
           ]),
           Container(
             height: 400,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("products1.jpg"), fit: BoxFit.fill),
+                  image: AssetImage("assets/products1.jpg"), fit: BoxFit.fill),
             ),
           ),
         ],
@@ -168,7 +105,7 @@ class _HomePageState extends State<HomePage>
           Row(children: [
             SizedBox(
               height: 50,
-              width: 400,
+              width: 200,
             ),
             Container(
                 decoration: BoxDecoration(
