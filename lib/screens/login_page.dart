@@ -68,13 +68,17 @@ class LoginPageState extends State<LoginPage>{
       CurrentUser.image = userDetails["image"];
 
       // goto homepage
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => HomePage()),
+      );
       return "Successful";
     }
-
+  
     _showMyDialog();
     return "Unsuccessful";
-
+    
   }
 
   @override
@@ -190,11 +194,6 @@ class LoginPageState extends State<LoginPage>{
                                 onPressed: () {
                                   if(formkey.currentState!.validate()){
                                     login(emailController.text,passwordController.text);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage()),
-                                    );
                                   }
                                 },
                                 child: Text(
