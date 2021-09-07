@@ -5,8 +5,8 @@ class CurrentUser{
   static String funds = "";
   static String image = "";
   
-  static void logToConsole()
+  static String getInfo()
   {
-    print("email=$email, firstName=$firstName, lastName=$lastName, funds=$funds, image=$image");
+    return "email=$email, firstName=$firstName, lastName=$lastName, funds=$funds, image=$image";
   }
 }
