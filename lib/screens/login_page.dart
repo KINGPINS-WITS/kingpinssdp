@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -154,7 +155,7 @@ class LoginPageState extends State<LoginPage>{
                           child: TextFormField(
                             key: Key("PasswordField"),
                             controller: passwordController,
-                            validator: RequiredValidator(errorText: "Requierd field!"),
+                            validator: RequiredValidator(errorText: "Required field!"),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Padding(
@@ -203,6 +204,8 @@ class LoginPageState extends State<LoginPage>{
                               ),
                             ),
                     ),
+
+
                     Container(
                       margin: EdgeInsets.symmetric(vertical:15, horizontal:0 ),
                       child: Container(
@@ -229,6 +232,35 @@ class LoginPageState extends State<LoginPage>{
                         ),
                       ),
                     ),
+
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical:15, horizontal:0 ),
+                      child: Container(
+                        height: 60,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.grey!.withOpacity(0.3),
+                        ),
+                        child: TextButton(
+
+                          key: Key("LoginButton"),
+                          onPressed: () {
+                            GoogleSignIn().signIn();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                            );
+                          },
+                          child: Text(
+                            "Sign in with Google",
+                            style: const TextStyle(fontSize: 22, color: Colors.black87, height: 1.5),
+                          ),
+                        ),
+                      ),
+                    ),
+
                   ],
                 ),
               ),
