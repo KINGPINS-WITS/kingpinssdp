@@ -7,6 +7,8 @@ import 'dart:async';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:kingpinssdp/current_user.dart';
 
+import '../homepage.dart';
+
 class LoginPage extends StatefulWidget{
   const LoginPage({Key? key}) : super(key: key);
   @override
@@ -106,6 +108,7 @@ class LoginPageState extends State<LoginPage>{
                         decoration: BoxDecoration(
                           color: Colors.grey[200]!.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(16),
+
                         ),
                         child: Center(
                           child: TextFormField(
@@ -185,6 +188,11 @@ class LoginPageState extends State<LoginPage>{
                                 onPressed: () {
                                   if(formkey.currentState!.validate()){
                                     login(emailController.text,passwordController.text);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
                                   }
                                 },
                                 child: Text(
