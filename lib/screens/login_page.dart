@@ -239,11 +239,11 @@ class LoginPageState extends State<LoginPage>{
                         width: 400,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
-                          color: Colors.grey!.withOpacity(0.3),
+                          color: Colors.grey.withOpacity(0.3),
                         ),
                         child: TextButton(
 
-                          key: Key("LoginButton"),
+                          key: Key("GoogleLoginButton"),
                           onPressed: () {
                             GoogleSignIn().signIn();
                             Navigator.push(
