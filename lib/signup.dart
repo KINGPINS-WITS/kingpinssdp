@@ -63,7 +63,7 @@ class SignupPageState extends State<SignupPage>{
       "email": emailController.text,
       "password": passwordController.text,
     });
-    var data = json.decode(response.body);
+    var data = response.body;
     if (data == "You are registered") {
       Fluttertoast.showToast(
         msg: "Successfully registered",
