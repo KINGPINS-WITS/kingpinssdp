@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage>
           Row(children: [
             SizedBox(
               height: 50,
-              width: 180,
+              width: 200,
             ),
             Container(
                 decoration: BoxDecoration(
@@ -181,6 +181,91 @@ class _HomePageState extends State<HomePage>
         ],
       )),
     ),
+
+    ContentView(
+      tab: CustomTab(title: 'PROFILE'),
+      content: Center(
+          child: Column(
+            children: [
+              Row(children: [
+                SizedBox(
+                  height: 50,
+                  width: 200,
+                ),
+
+              ]),
+
+            ],
+          )),
+    ),
+
+    ContentView(
+      tab: CustomTab(title: 'BALANCE'),
+      content: Center(
+          child: Column(
+            children: [
+              Row(children: [
+                SizedBox(
+                  height: 50,
+                  width: 200,
+                ),
+
+              ]),
+
+            ],
+          )),
+    ),
+
+    ContentView(
+      tab: CustomTab(title: 'CART'),
+      content: Center(
+          child: Column(
+            children: [
+              Row(children: [
+                SizedBox(
+                  height: 50,
+                  width: 200,
+                ),
+
+              ]),
+
+            ],
+          )),
+    ),
+    ContentView(
+      tab: CustomTab(title: 'WISHLIST'),
+      content: Center(
+          child: Column(
+            children: [
+              Row(children: [
+                SizedBox(
+                  height: 50,
+                  width: 200,
+                ),
+
+              ]),
+
+            ],
+          )),
+    ),
+    ContentView(
+      tab: CustomTab(title: 'LOGOUT'),
+      content: Center(
+          child: Column(
+            children: [
+              Row(children: [
+                SizedBox(
+                  height: 50,
+                  width: 200,
+                ),
+
+              ]),
+
+            ],
+          )),
+    ),
+
+
   ];
 
   @override
@@ -199,6 +284,7 @@ class _HomePageState extends State<HomePage>
             tabs: contentViews.map((e) => e.tab).toList()),
         Container(
           height: screenHeight * 0.75,
+          width: screenWidth * 0.75,
           child: TabBarView(
             controller: tabController,
             children: contentViews.map((e) => e.content).toList(),
