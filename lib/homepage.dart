@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kingpinssdp/products/books.dart';
 import 'package:kingpinssdp/Controllers/custom_tab.dart';
 import 'package:kingpinssdp/Controllers/custom_tab_bar.dart';
 import 'package:kingpinssdp/classes/content_view.dart';
+import 'package:kingpinssdp/products/books.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,7 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  late TabController tabController;
+  //late TabController tabController;
+  /*
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   late double screenHeight;
@@ -267,6 +270,239 @@ class _HomePageState extends State<HomePage>
             return mobileView();
           }
         }),
+      ),
+    );
+  }
+  */
+  late TabController _controller;
+  int _selectedIndex = 0;
+
+  List<Widget> list = [
+    Tab(text: "PRODUCTS"),
+    Tab(text: "SERVICES"),
+  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // Create TabController for getting the index of current tab
+    _controller = TabController(length: list.length, vsync: this);
+
+    _controller.addListener(() {
+      setState(() {
+        _selectedIndex = _controller.index;
+      });
+      print("Selected Index: " + _controller.index.toString());
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("STUMARKET"),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.person,
+              ),
+              onPressed: () {},
+            )
+          ],
+          bottom: new PreferredSize(
+            preferredSize: new Size(220.0, 30.0),
+            child: new Container(
+              width: 220.0,
+              child: new TabBar(
+                controller: _controller,
+                tabs: list,
+              ),
+            ),
+          ),
+        ),
+        body: TabBarView(
+          controller: _controller,
+          children: [
+            Center(
+              child: Center(
+                  child: Column(
+                children: [
+                  Row(children: [
+                    SizedBox(
+                      height: 50,
+                      width: 180,
+                    ),
+                    Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                              right: BorderSide(
+                            //                   <--- left side
+                            color: Color.fromARGB(256, 26, 35, 16),
+                            width: 1.5,
+                          )),
+                        ),
+                        child: FlatButton(
+                          color: Colors.grey[350],
+                          focusColor: Colors.blue,
+                          hoverColor: Colors.blue,
+                          splashColor: Colors.blue,
+                          onPressed: () {},
+                          child: Text(
+                            'STATIONERY',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          // padding: EdgeInsets.only(right: 25, left: 25),
+                        )),
+                    Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                              right: BorderSide(
+                            //                   <--- left side
+                            color: Color.fromARGB(256, 26, 35, 16),
+                            width: 1.5,
+                          )),
+                        ),
+                        child: FlatButton(
+                          color: Colors.grey[350],
+                          focusColor: Colors.blue,
+                          hoverColor: Colors.blue,
+                          splashColor: Colors.blue,
+                          onPressed: () {},
+                          child: Text(
+                            'PERIPHERALS',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          //  padding: EdgeInsets.only(right: 25, left: 25),
+                        )),
+                    Container(
+                        decoration: BoxDecoration(),
+                        child: FlatButton(
+                          color: Colors.grey[350],
+                          focusColor: Colors.blue,
+                          hoverColor: Colors.blue,
+                          splashColor: Colors.blue,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AllPersonData(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'BOOKS',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          // padding: EdgeInsets.only(right: 25, left: 25),
+                        )),
+                  ]),
+                  Container(
+                    height: 400,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/products1.jpg"),
+                          fit: BoxFit.fill),
+                    ),
+                  ),
+                ],
+              )),
+            ),
+            Center(
+                child: Column(
+              children: [
+                Row(children: [
+                  SizedBox(
+                    height: 50,
+                    width: 200,
+                  ),
+                  Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                            right: BorderSide(
+                          //                   <--- left side
+                          color: Color.fromARGB(256, 26, 35, 16),
+                          width: 1.5,
+                        )),
+                      ),
+                      child: FlatButton(
+                        color: Colors.grey[350],
+                        focusColor: Colors.blue,
+                        hoverColor: Colors.blue,
+                        splashColor: Colors.blue,
+                        onPressed: () {},
+                        child: Text(
+                          'BOOK A TUTOR',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        padding: EdgeInsets.only(right: 25, left: 25),
+                      )),
+                  Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                            right: BorderSide(
+                          //                   <--- left side
+                          color: Color.fromARGB(256, 26, 35, 16),
+                          width: 1.5,
+                        )),
+                      ),
+                      child: FlatButton(
+                        color: Colors.grey[350],
+                        focusColor: Colors.blue,
+                        hoverColor: Colors.blue,
+                        splashColor: Colors.blue,
+                        onPressed: () {},
+                        child: Text(
+                          'LAPTOP REPAIR',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        padding: EdgeInsets.only(right: 25, left: 25),
+                      )),
+                  Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                            right: BorderSide(
+                          //                   <--- left side
+                          color: Color.fromARGB(256, 26, 35, 16),
+                          width: 1.5,
+                        )),
+                      ),
+                      child: FlatButton(
+                        color: Colors.grey[350],
+                        focusColor: Colors.blue,
+                        hoverColor: Colors.blue,
+                        splashColor: Colors.blue,
+                        onPressed: () {},
+                        child: Text(
+                          'MENTORSHIP',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        padding: EdgeInsets.only(right: 25, left: 25),
+                      )),
+                ]),
+                Container(
+                  height: 400,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("services1.png"), fit: BoxFit.fill),
+                  ),
+                ),
+              ],
+            )),
+          ],
+        ),
       ),
     );
   }

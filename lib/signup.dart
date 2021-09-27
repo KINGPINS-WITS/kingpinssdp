@@ -9,18 +9,15 @@ import 'package:kingpinssdp/current_user.dart';
 import 'package:kingpinssdp/screens/login_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 import '../homepage.dart';
 
-class SignupPage extends StatefulWidget{
+class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
   @override
   SignupPageState createState() => SignupPageState();
 }
 
-
-class SignupPageState extends State<SignupPage>{
-
+class SignupPageState extends State<SignupPage> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -73,8 +70,7 @@ class SignupPageState extends State<SignupPage>{
       );
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => LoginPage()),
+        MaterialPageRoute(builder: (context) => LoginPage()),
       );
 
       // Navigator.push(
@@ -106,7 +102,6 @@ class SignupPageState extends State<SignupPage>{
                     fontWeight: FontWeight.bold),
               ),
             ),
-
           ),
           Form(
             key: formkey,
@@ -127,11 +122,13 @@ class SignupPageState extends State<SignupPage>{
                       child: TextFormField(
                         key: Key("FirstNameField"),
                         controller: firstnameController,
-                        validator: RequiredValidator(errorText: "Required field!"),
+                        validator:
+                            RequiredValidator(errorText: "Required field!"),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
                             child: Icon(
                               Icons.person,
                               size: 28,
@@ -139,10 +136,14 @@ class SignupPageState extends State<SignupPage>{
                             ),
                           ),
                           hintText: "First Name",
-                          hintStyle: TextStyle(fontSize: 22, color: Colors.grey[400], height: 1.5),
+                          hintStyle: TextStyle(
+                              fontSize: 22,
+                              color: Colors.grey[400],
+                              height: 1.5),
                         ),
                         obscureText: false,
-                        style: TextStyle(fontSize: 22, color: Colors.black, height: 1.5),
+                        style: TextStyle(
+                            fontSize: 22, color: Colors.black, height: 1.5),
                         keyboardType: TextInputType.text,
                       ),
                     ),
@@ -161,11 +162,13 @@ class SignupPageState extends State<SignupPage>{
                       child: TextFormField(
                         key: Key("LastNameField"),
                         controller: lastnameController,
-                        validator: RequiredValidator(errorText: "Required field!"),
+                        validator:
+                            RequiredValidator(errorText: "Required field!"),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
                             child: Icon(
                               Icons.person,
                               size: 28,
@@ -173,10 +176,14 @@ class SignupPageState extends State<SignupPage>{
                             ),
                           ),
                           hintText: "Last Name",
-                          hintStyle: TextStyle(fontSize: 22, color: Colors.grey[400], height: 1.5),
+                          hintStyle: TextStyle(
+                              fontSize: 22,
+                              color: Colors.grey[400],
+                              height: 1.5),
                         ),
                         obscureText: false,
-                        style: TextStyle(fontSize: 22, color: Colors.black, height: 1.5),
+                        style: TextStyle(
+                            fontSize: 22, color: Colors.black, height: 1.5),
                         keyboardType: TextInputType.text,
                       ),
                     ),
@@ -190,22 +197,20 @@ class SignupPageState extends State<SignupPage>{
                     decoration: BoxDecoration(
                       color: Colors.grey[200]!.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(16),
-
                     ),
                     child: Center(
                       child: TextFormField(
                           key: Key("EmailField"),
                           controller: emailController,
-                          validator: MultiValidator(
-                              [
-                                RequiredValidator(errorText: "Required field!"),
-                                EmailValidator(errorText: "Invalid email address!"),
-                              ]
-                          ),
+                          validator: MultiValidator([
+                            RequiredValidator(errorText: "Required field!"),
+                            EmailValidator(errorText: "Invalid email address!"),
+                          ]),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             prefixIcon: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
                               child: Icon(
                                 Icons.mail,
                                 size: 28,
@@ -213,12 +218,15 @@ class SignupPageState extends State<SignupPage>{
                               ),
                             ),
                             hintText: "Email",
-                            hintStyle: TextStyle(fontSize: 22, color: Colors.grey[400], height: 1.5),
+                            hintStyle: TextStyle(
+                                fontSize: 22,
+                                color: Colors.grey[400],
+                                height: 1.5),
                           ),
-                          style: TextStyle(fontSize: 22, color: Colors.black, height: 1.5),
+                          style: TextStyle(
+                              fontSize: 22, color: Colors.black, height: 1.5),
                           keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next
-                      ),
+                          textInputAction: TextInputAction.next),
                     ),
                   ),
                 ),
@@ -235,11 +243,13 @@ class SignupPageState extends State<SignupPage>{
                       child: TextFormField(
                         key: Key("PasswordField"),
                         controller: passwordController,
-                        validator: RequiredValidator(errorText: "Required field!"),
+                        validator:
+                            RequiredValidator(errorText: "Required field!"),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
                             child: Icon(
                               Icons.lock,
                               size: 28,
@@ -247,17 +257,21 @@ class SignupPageState extends State<SignupPage>{
                             ),
                           ),
                           hintText: "Password",
-                          hintStyle: TextStyle(fontSize: 22, color: Colors.grey[400], height: 1.5),
+                          hintStyle: TextStyle(
+                              fontSize: 22,
+                              color: Colors.grey[400],
+                              height: 1.5),
                         ),
                         obscureText: true,
-                        style: TextStyle(fontSize: 22, color: Colors.black, height: 1.5),
+                        style: TextStyle(
+                            fontSize: 22, color: Colors.black, height: 1.5),
                         keyboardType: TextInputType.text,
                       ),
                     ),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical:15, horizontal:0 ),
+                  margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
                   child: Container(
                     height: 60,
                     width: 400,
@@ -268,7 +282,7 @@ class SignupPageState extends State<SignupPage>{
                     child: TextButton(
                       key: Key("registerButton"),
                       onPressed: () {
-                        if(formkey.currentState!.validate()){
+                        if (formkey.currentState!.validate()) {
                           registration(context);
                           // Navigator.push(
                           //   context,
@@ -279,13 +293,14 @@ class SignupPageState extends State<SignupPage>{
                       },
                       child: Text(
                         "Register",
-                        style: const TextStyle(fontSize: 22, color: Colors.white, height: 1.5),
+                        style: const TextStyle(
+                            fontSize: 22, color: Colors.white, height: 1.5),
                       ),
                     ),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical:15, horizontal:0 ),
+                  margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
                   child: Container(
                     height: 60,
                     width: 400,
@@ -298,14 +313,13 @@ class SignupPageState extends State<SignupPage>{
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginPage()),
+                          MaterialPageRoute(builder: (context) => LoginPage()),
                         );
-
                       },
                       child: Text(
                         "Go Back",
-                        style: const TextStyle(fontSize: 22, color: Colors.white, height: 1.5),
+                        style: const TextStyle(
+                            fontSize: 22, color: Colors.white, height: 1.5),
                       ),
                     ),
                   ),
