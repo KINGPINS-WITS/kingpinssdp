@@ -280,6 +280,10 @@ class _HomePageState extends State<HomePage>
   List<Widget> list = [
     Tab(text: "PRODUCTS"),
     Tab(text: "SERVICES"),
+    Tab(text: "PROFILE"),
+    Tab(text: "CART"),
+    Tab(text: "ABOUT US"),
+
   ];
 
   @override
@@ -317,9 +321,9 @@ class _HomePageState extends State<HomePage>
             )
           ],
           bottom: new PreferredSize(
-            preferredSize: new Size(220.0, 30.0),
+            preferredSize: new Size(600.0, 30.0),
             child: new Container(
-              width: 220.0,
+              width: 600.0,
               child: new TabBar(
                 controller: _controller,
                 tabs: list,
@@ -501,6 +505,57 @@ class _HomePageState extends State<HomePage>
                 ),
               ],
             )),
+
+
+            Center(
+                child: Column(
+                  children: [
+                    Row(children: [
+                      SizedBox(
+                        height: 50,
+                        width: 200,
+                      ),
+
+
+                    ]),
+
+                  ],
+                )),
+
+            Center(
+                child: Column(
+                  children: [
+                    Row(children: [
+                      SizedBox(
+                        height: 50,
+                        width: 200,
+                      ),
+
+
+                    ]),
+
+                  ],
+                )),
+
+
+            Center(
+                child: Column(
+                  children: [
+                    Row(children: [
+                      SizedBox(
+                        height: 50,
+                        width: 200,
+                      ),
+
+
+                    ]),
+
+                  ],
+                )),
+
+
+
+
           ],
         ),
       ),
