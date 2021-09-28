@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kingpinssdp/products/books.dart';
-import 'package:kingpinssdp/Controllers/custom_tab.dart';
-import 'package:kingpinssdp/Controllers/custom_tab_bar.dart';
-import 'package:kingpinssdp/classes/content_view.dart';
+import 'package:kingpinssdp/Services/mentorship.dart';
+import 'package:kingpinssdp/Services/tutor.dart';
 import 'package:kingpinssdp/products/books.dart';
 import 'package:kingpinssdp/screens/profile.dart';
+
+import 'Services/repair.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage>
                   child: Text(
                     'STATIONERY',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+
                   ),
                   // padding: EdgeInsets.only(right: 25, left: 25),
                 )),
@@ -83,7 +84,9 @@ class _HomePageState extends State<HomePage>
                   focusColor: Colors.blue,
                   hoverColor: Colors.blue,
                   splashColor: Colors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   child: Text(
                     'BOOKS',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -318,7 +321,13 @@ class _HomePageState extends State<HomePage>
               icon: Icon(
                 Icons.person,
               ),
-              onPressed: () {}
+              onPressed: () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage()),
+                );
+              }
             )
           ],
           bottom: new PreferredSize(
@@ -444,9 +453,16 @@ class _HomePageState extends State<HomePage>
                         focusColor: Colors.blue,
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Tutoring(),
+                            ),
+                          );
+                        },
                         child: Text(
-                          'BOOK A TUTOR',
+                          'TUTORING',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -466,9 +482,16 @@ class _HomePageState extends State<HomePage>
                         focusColor: Colors.blue,
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Repairing(),
+                            ),
+                          );
+                        },
                         child: Text(
-                          'LAPTOP REPAIR',
+                          'REPAIRS',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -488,7 +511,14 @@ class _HomePageState extends State<HomePage>
                         focusColor: Colors.blue,
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Mentoring(),
+                            ),
+                          );
+                        },
                         child: Text(
                           'MENTORSHIP',
                           style: TextStyle(

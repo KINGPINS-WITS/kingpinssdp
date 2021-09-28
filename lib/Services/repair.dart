@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class AllPersonData extends StatefulWidget {
+class Repairing extends StatefulWidget {
   @override
-  _AllPersonDataState createState() => _AllPersonDataState();
+  _RepairingState createState() => _RepairingState();
 }
 
-class _AllPersonDataState extends State<AllPersonData> {
+class _RepairingState extends State<Repairing> {
   Future allPerson() async {
     var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll.php";
     var response = await http.get(Uri.parse(url));
@@ -25,46 +25,45 @@ class _AllPersonDataState extends State<AllPersonData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BOOKS'),
+        title: Text('Repairs'),
       ),
       body: FutureBuilder(
-        initialData: [],
         future: allPerson(),
-        builder: (context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) print(snapshot.error);
-          //
+          int i = 0;
           return snapshot.hasData
               ? GridView.builder(
-                  physics: ScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: (3 / 3),
-                  ),
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    List list = snapshot.data;
+              physics: ScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: (3 / 4),
+              ),
 
-                    return Container(
-                      // width: 130,
-                      // height: 300,
-                      padding: EdgeInsets.only(right: 10.0),
-                      width: MediaQuery.of(context).size.width - 10.0,
-                      height: MediaQuery.of(context).size.height - 20.0,
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                List list = snapshot.data;
 
-                      child: _buildCard(
-                          list[index]['description'],
-                          "R" + list[index]['price'],
-                          list[index]['image'],
-                          false,
-                          false,
-                          context),
-                    );
-                  })
-              : Center(
-                  child: CircularProgressIndicator(),
+                return Container(
+                  // width: 130,
+                  // height: 300,
+                  padding: EdgeInsets.only(right: 10.0),
+                  width: MediaQuery.of(context).size.width - 10.0,
+                  height: MediaQuery.of(context).size.height - 20.0,
+
+                  child: _buildCard(
+                      list[index]['description'],
+                      list[index]['price'],
+                      list[index]['image'],
+                      false,
+                      false,
+                      context),
                 );
-          // }
+              })
+              : Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
@@ -74,7 +73,7 @@ class _AllPersonDataState extends State<AllPersonData> {
 Widget _buildCard(String name, String price, String imgPath, bool added,
     bool isFavorite, context) {
   return Padding(
-      padding: EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
+      padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
       child: InkWell(
           onTap: () {},
           child: Container(
@@ -88,33 +87,32 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
                   ],
                   color: Colors.white),
               child: Column(children: [
-                Container(
+                Padding(
+                    padding: EdgeInsets.all(5.0),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                      Icon(Icons.favorite_border, color: Colors.blue)
-                    ])),
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
+                          Icon(Icons.favorite_border, color: Colors.green)
+                        ])),
+                Hero(
+                    tag: imgPath,
                     child: Container(
-                        height: 150.0,
+                        height: 20.0,
                         width: 130.0,
                         child: Image.network(imgPath))),
                 Text(price,
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.green,
                         fontFamily: 'Varela',
                         fontSize: 14.0)),
                 Text(name,
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.green,
                         fontFamily: 'Varela',
                         fontSize: 14.0)),
                 Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Container(color: Colors.blue, height: 1.0)),
+                    child: Container(color: Colors.green, height: 1.0)),
                 Padding(
                     padding: EdgeInsets.only(left: 5.0, right: 5.0),
                     child: Row(
@@ -126,16 +124,16 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
                             Text('Add to cart',
                                 style: TextStyle(
                                     fontFamily: 'Varela',
-                                    color: Colors.blue,
+                                    color: Colors.green,
                                     fontSize: 12.0))
                           ],
                           if (added) ...[
                             Icon(Icons.shopping_basket,
-                                color: Colors.blue, size: 12.0),
+                                color: Colors.green, size: 12.0),
                             Text('Add to cart',
                                 style: TextStyle(
                                     fontFamily: 'Varela',
-                                    color: Colors.blue,
+                                    color: Colors.green,
                                     fontSize: 12.0))
                           ]
                         ]))
