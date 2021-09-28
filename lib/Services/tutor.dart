@@ -10,7 +10,7 @@ class Tutoring extends StatefulWidget {
 
 class _TutoringState extends State<Tutoring> {
   Future allPerson() async {
-    var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll.php";
+    var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll2.php";
     var response = await http.get(Uri.parse(url));
     return json.decode(response.body);
   }
@@ -38,7 +38,7 @@ class _TutoringState extends State<Tutoring> {
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                childAspectRatio: (3 / 4),
+                childAspectRatio: (1/ 1),
               ),
 
               itemCount: snapshot.data.length,
@@ -46,16 +46,15 @@ class _TutoringState extends State<Tutoring> {
                 List list = snapshot.data;
 
                 return Container(
-                  // width: 130,
-                  // height: 300,
+                  width: 130,
+                  height: 200,
                   padding: EdgeInsets.only(right: 10.0),
-                  width: MediaQuery.of(context).size.width - 10.0,
-                  height: MediaQuery.of(context).size.height - 20.0,
+                 //width: MediaQuery.of(context).size.width - 10.0,
+                // height: MediaQuery.of(context).size.height - 20.0,
 
                   child: _buildCard(
                       list[index]['description'],
                       list[index]['price'],
-                      list[index]['image'],
                       false,
                       false,
                       context),
@@ -70,7 +69,7 @@ class _TutoringState extends State<Tutoring> {
   }
 }
 
-Widget _buildCard(String name, String price, String imgPath, bool added,
+Widget _buildCard(String name, String price, bool added,
     bool isFavorite, context) {
   return Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
@@ -94,12 +93,7 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
                         children: [
                           Icon(Icons.favorite_border, color: Colors.green)
                         ])),
-                Hero(
-                    tag: imgPath,
-                    child: Container(
-                        height: 20.0,
-                        width: 130.0,
-                        child: Image.network(imgPath))),
+
                 Text(price,
                     style: TextStyle(
                         color: Colors.green,

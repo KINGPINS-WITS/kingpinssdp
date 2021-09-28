@@ -462,7 +462,7 @@ class _HomePageState extends State<HomePage>
                           );
                         },
                         child: Text(
-                          'TUTORING',
+                          'BOOK A TUTOR',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -491,7 +491,7 @@ class _HomePageState extends State<HomePage>
                           );
                         },
                         child: Text(
-                          'REPAIRS',
+                          'LAPTOP REPAIRS',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
