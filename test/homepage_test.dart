@@ -13,6 +13,15 @@
      var serTitle = find.text("SERVICES");
      expect(serTitle, findsOneWidget);
 
+     var profTitle = find.text("PROFILE");
+     expect(profTitle, findsOneWidget);
+
+    var cartTitle = find.text("CART");
+    expect(cartTitle, findsOneWidget);
+
+    var abTitle = find.text("ABOUT US");
+    expect(abTitle, findsOneWidget);
+
      var pro1 = find.text("BOOKS");
      expect(pro1, findsOneWidget);
 
