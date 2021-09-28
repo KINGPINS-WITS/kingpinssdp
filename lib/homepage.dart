@@ -483,12 +483,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Repairing(),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => Repairing(),
+                          //   ),
+                          // );
                         },
                         child: Text(
                           'LAPTOP REPAIRS',
@@ -512,12 +512,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Mentoring(),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => Mentoring(),
+                          //   ),
+                          // );
                         },
                         child: Text(
                           'MENTORSHIP',
