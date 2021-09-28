@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class AllPersonData extends StatefulWidget {
+class Tutoring extends StatefulWidget {
   @override
-  _AllPersonDataState createState() => _AllPersonDataState();
+  _TutoringState createState() => _TutoringState();
 }
 
-class _AllPersonDataState extends State<AllPersonData> {
+class _TutoringState extends State<Tutoring> {
   Future allPerson() async {
     var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll.php";
     var response = await http.get(Uri.parse(url));
@@ -25,7 +25,7 @@ class _AllPersonDataState extends State<AllPersonData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Books'),
+        title: Text('Tutors'),
       ),
       body: FutureBuilder(
         future: allPerson(),
@@ -34,36 +34,36 @@ class _AllPersonDataState extends State<AllPersonData> {
           int i = 0;
           return snapshot.hasData
               ? GridView.builder(
-                  physics: ScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: (3 / 4),
-                  ),
+              physics: ScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: (3 / 4),
+              ),
 
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                    List list = snapshot.data;
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                List list = snapshot.data;
 
-                    return Container(
-                      // width: 130,
-                      // height: 300,
-                      padding: EdgeInsets.only(right: 10.0),
-                      width: MediaQuery.of(context).size.width - 10.0,
-                      height: MediaQuery.of(context).size.height - 20.0,
+                return Container(
+                  // width: 130,
+                  // height: 300,
+                  padding: EdgeInsets.only(right: 10.0),
+                  width: MediaQuery.of(context).size.width - 10.0,
+                  height: MediaQuery.of(context).size.height - 20.0,
 
-                      child: _buildCard(
-                          list[index]['description'],
-                          list[index]['price'],
-                          list[index]['image'],
-                          false,
-                          false,
-                          context),
-                    );
-                  })
-              : Center(
-                  child: CircularProgressIndicator(),
+                  child: _buildCard(
+                      list[index]['description'],
+                      list[index]['price'],
+                      list[index]['image'],
+                      false,
+                      false,
+                      context),
                 );
+              })
+              : Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
@@ -97,7 +97,7 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
                 Hero(
                     tag: imgPath,
                     child: Container(
-                        height: 150.0,
+                        height: 20.0,
                         width: 130.0,
                         child: Image.network(imgPath))),
                 Text(price,
@@ -136,11 +136,6 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
                                     color: Colors.green,
                                     fontSize: 12.0))
                           ]
-                        ]
-                    )
-                )
-              ])
-          )
-      )
-  );
+                        ]))
+              ]))));
 }
