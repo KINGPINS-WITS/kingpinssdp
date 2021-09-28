@@ -318,7 +318,13 @@ class _HomePageState extends State<HomePage>
               icon: Icon(
                 Icons.person,
               ),
-              onPressed: () {}
+              onPressed: () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage()),
+                );
+              }
             )
           ],
           bottom: new PreferredSize(
