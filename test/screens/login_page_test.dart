@@ -21,4 +21,13 @@ void main() {
     expect(find.text("12345678"), findsOneWidget);
     expect(find.text("Log In"), findsOneWidget);
   });
+
+  testWidgets('Goto Signup ...', (tester) async {
+    final signUp = find.byKey(ValueKey("signupButton"));
+
+    await tester.pumpWidget(MaterialApp(home: LoginPage(),));
+    await tester.tap(signUp);
+
+    expect(find.text("Log In"), findsOneWidget);
+  });
 }
