@@ -550,6 +550,16 @@ class _HomePageState extends State<HomePage>
 
                     ]),
 
+                    RichText(
+                      text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: const <TextSpan>[
+                          TextSpan(text: 'This is a platform for students to be able to collaborate to be able to purchase textbooks and provide services to students. StuMarket’s main goal is to make it easy for students to find and buy textbooks and should be able to see a list of textbooks they might want to buy. They should be able to find the textbooks in the category in which the textbooks are in. StuMarket also provides student services.', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 25)),
+
+                        ],
+                      ),
+                    )
+
                   ],
                 )),
 
