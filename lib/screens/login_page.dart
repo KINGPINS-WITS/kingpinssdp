@@ -18,6 +18,26 @@ class LoginPage extends StatefulWidget{
 }
 
 
+Future<String> login(String email, String password, http.Client client) async {
+
+  var url = "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/login.php?email=$email&password=$password";
+  final res = await client.post(
+    Uri.parse(url),
+    );
+  
+  var response = res.body;
+  if(response != "Invalid login details!"){
+    var userDetails = jsonDecode(response);
+    CurrentUser.email = userDetails["email"];
+    CurrentUser.firstName = userDetails["firstname"];
+    CurrentUser.lastName = userDetails["lastname"];
+    CurrentUser.funds = userDetails["funds"];
+    CurrentUser.image = userDetails["image"];
+    return "Successful";
+  }
+  return "Unsuccessful";
+}
+
 class LoginPageState extends State<LoginPage>{
 
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
@@ -50,37 +70,6 @@ class LoginPageState extends State<LoginPage>{
     },
   );
 }
-
-  Future<String> login(String email, String password) async {
-
-    var url = "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/login.php?email=$email&password=$password";
-    final res = await http.post(
-      Uri.parse(url),
-      );
-    
-    var response = res.body;
-    if(response != "Invalid login details!"){
-      var userDetails = jsonDecode(response);
-      CurrentUser.email = userDetails["email"];
-      CurrentUser.firstName = userDetails["firstname"];
-      CurrentUser.lastName = userDetails["lastname"];
-      CurrentUser.funds = userDetails["funds"];
-      CurrentUser.image = userDetails["image"];
-
-      // goto homepage
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomePage()),
-      );
-      return "Successful";
-    }
-  
-    _showMyDialog();
-    return "Unsuccessful";
-    
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,7 +182,20 @@ class LoginPageState extends State<LoginPage>{
                                 key: Key("LoginButton"),
                                 onPressed: () {
                                   if(formkey.currentState!.validate()){
-                                    login(emailController.text,passwordController.text);
+                                    login(emailController.text, passwordController.text, http.Client()).then((value){
+                                      if(value == "Successful"){
+                                        // goto homepage
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => HomePage()),
+                                        );
+                                      }
+                                      else{
+                                        _showMyDialog();
+                                      }
+                                    });
+                                    
                                   }
                                 },
                                 child: Text(
