@@ -5,6 +5,7 @@ import 'package:kingpinssdp/Controllers/custom_tab.dart';
 import 'package:kingpinssdp/Controllers/custom_tab_bar.dart';
 import 'package:kingpinssdp/classes/content_view.dart';
 import 'package:kingpinssdp/products/books.dart';
+import 'package:kingpinssdp/screens/profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -317,7 +318,13 @@ class _HomePageState extends State<HomePage>
               icon: Icon(
                 Icons.person,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProfilePage()),
+              );
+                                        }
             )
           ],
           bottom: new PreferredSize(
