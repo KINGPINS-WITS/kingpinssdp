@@ -31,10 +31,10 @@
      var pro3 = find.text("PERIPHERALS");
      expect(pro3, findsOneWidget);
 
-     var ser1 = find.text("TUTORING");
+     var ser1 = find.text("BOOK A TUTOR");
      expect(pro1, findsOneWidget);
 
-     var ser2 = find.text("REPAIRS");
+     var ser2 = find.text("LAPTOP REPAIR");
      expect(pro2, findsOneWidget);
 
      var ser3 = find.text("MENTORSHIP");
