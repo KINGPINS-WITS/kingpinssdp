@@ -284,7 +284,6 @@ class _HomePageState extends State<HomePage>
   List<Widget> list = [
     Tab(text: "PRODUCTS"),
     Tab(text: "SERVICES"),
-    Tab(text: "PROFILE"),
     Tab(text: "CART"),
     Tab(text: "ABOUT US"),
 
@@ -537,21 +536,6 @@ class _HomePageState extends State<HomePage>
               ],
             )),
 
-
-            Center(
-                child: Column(
-                  children: [
-                    Row(children: [
-                      SizedBox(
-                        height: 50,
-                        width: 200,
-                      ),
-
-
-                    ]),
-
-                  ],
-                )),
 
             Center(
                 child: Column(
