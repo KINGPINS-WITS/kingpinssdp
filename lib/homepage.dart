@@ -4,6 +4,7 @@ import 'package:kingpinssdp/Services/mentorship.dart';
 import 'package:kingpinssdp/Services/tutor.dart';
 import 'package:kingpinssdp/products/books.dart';
 import 'package:kingpinssdp/screens/profile.dart';
+import 'package:kingpinssdp/screens/cart.dart';
 
 import 'Services/repair.dart';
 
@@ -284,10 +285,7 @@ class _HomePageState extends State<HomePage>
   List<Widget> list = [
     Tab(text: "PRODUCTS"),
     Tab(text: "SERVICES"),
-    Tab(text: "PROFILE"),
-    Tab(text: "CART"),
     Tab(text: "ABOUT US"),
-
   ];
 
   @override
@@ -316,6 +314,16 @@ class _HomePageState extends State<HomePage>
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Cart()),
+                );
+              },
             ),
             IconButton(
               icon: Icon(
@@ -536,8 +544,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ],
             )),
-
-
+            
             Center(
                 child: Column(
                   children: [
@@ -546,39 +553,6 @@ class _HomePageState extends State<HomePage>
                         height: 50,
                         width: 200,
                       ),
-
-
-                    ]),
-
-                  ],
-                )),
-
-            Center(
-                child: Column(
-                  children: [
-                    Row(children: [
-                      SizedBox(
-                        height: 50,
-                        width: 200,
-                      ),
-
-
-                    ]),
-
-                  ],
-                )),
-
-
-            Center(
-                child: Column(
-                  children: [
-                    Row(children: [
-                      SizedBox(
-                        height: 50,
-                        width: 200,
-                      ),
-
-
                     ]),
 
                     RichText(
@@ -593,10 +567,6 @@ class _HomePageState extends State<HomePage>
 
                   ],
                 )),
-
-
-
-
           ],
         ),
       ),
