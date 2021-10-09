@@ -10,7 +10,27 @@ class ProfilePage extends StatefulWidget{
   @override
   ProfilePageState createState() => ProfilePageState();
 }
-
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Upload an advert'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Hello"),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
+}
 
 class ProfilePageState extends State<ProfilePage>{
 
@@ -129,27 +149,53 @@ class ProfilePageState extends State<ProfilePage>{
                               ),
                             ),
 
-                            // Container(
-                            //   margin: EdgeInsets.symmetric(vertical:15, horizontal:0 ),
-                            //   child: Container(
-                            //           height: 60,
-                            //           width: 400,
-                            //           decoration: BoxDecoration(
-                            //             borderRadius: BorderRadius.circular(40),
-                            //             color: Colors.blue[900],
-                            //           ),
-                            //           child: TextButton(
-                            //             key: Key("saveButton"),
-                            //             onPressed: () {
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Container(
+                                height: 60,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200]!.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(16),
 
-                            //             },
-                            //             child: Text(
-                            //               "Save",
-                            //               style: const TextStyle(fontSize: 22, color: Colors.white, height: 1.5),
-                            //             ),
-                            //           ),
-                            //         ),
-                            // ),
+                                ),
+                                child: Row(
+                                children: [
+                                  SizedBox(
+                                    width:22,
+                                  ),
+                                  Center(
+
+                                    child: ElevatedButton(
+
+                                      onPressed: () {
+                                        // Respond to button press
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) => _buildPopupDialog(context),
+                                        );
+                                      },
+
+                                      child: Text('Upload an add'),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:22,
+                                  ),
+                                  Center(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Respond to button press
+                                      },
+                                      child: Text('save'),
+                                    ),
+                                  ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+
                           ],
                         ),
                       ),
