@@ -46,22 +46,12 @@ class ProfilePageState extends State<ProfilePage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+          appBar: AppBar(
+            title: Text('PROFILE'),
+          ),
           backgroundColor: Colors.grey[50],
           body: Column(
             children: [
-              Container(
-                
-                color: Colors.blue[900],
-                child: Center(
-                  child: Text(
-                    'Profile',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 60,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
               Form(
                 key: formkey,
                 autovalidateMode: AutovalidateMode.always,
