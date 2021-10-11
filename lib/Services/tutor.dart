@@ -2,10 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:kingpinssdp/current_user.dart';
 
 class Tutoring extends StatefulWidget {
   @override
   _TutoringState createState() => _TutoringState();
+}
+
+Future<String> addToCart(String id, String seller) async {
+  String buyer = CurrentUser.email;
+  var url = "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/add_to_cart.php?buyerEmail=$buyer&sellerEmail=$seller&productId=$id";
+  var response = await http.get(Uri.parse(url));
+  return response.body;
 }
 
 class _TutoringState extends State<Tutoring> {
@@ -53,6 +61,8 @@ class _TutoringState extends State<Tutoring> {
                 // height: MediaQuery.of(context).size.height - 20.0,
 
                   child: _buildCard(
+                      list[index]['id'],
+                      list[index]['seller'],
                       list[index]['description'],
                       list[index]['price'],
                       false,
@@ -69,7 +79,7 @@ class _TutoringState extends State<Tutoring> {
   }
 }
 
-Widget _buildCard(String name, String price, bool added,
+Widget _buildCard(String id, String seller, String name, String price, bool added,
     bool isFavorite, context) {
   return Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
@@ -115,20 +125,30 @@ Widget _buildCard(String name, String price, bool added,
                           if (!added) ...[
                             Icon(Icons.shopping_basket,
                                 color: Colors.green, size: 12.0),
-                            Text('Add to cart',
+                            InkWell(
+                              child: Text('Add to cart',
                                 style: TextStyle(
                                     fontFamily: 'Varela',
-                                    color: Colors.green,
-                                    fontSize: 12.0))
+                                    color: Colors.blue,
+                                    fontSize: 12.0)),
+                                onTap: (){
+                                  addToCart(id, seller).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value))));
+                                },
+                            ),
                           ],
                           if (added) ...[
                             Icon(Icons.shopping_basket,
-                                color: Colors.green, size: 12.0),
-                            Text('Add to cart',
+                                color: Colors.blue, size: 12.0),
+                            InkWell(
+                              child: Text('Add to cart',
                                 style: TextStyle(
                                     fontFamily: 'Varela',
-                                    color: Colors.green,
-                                    fontSize: 12.0))
+                                    color: Colors.blue,
+                                    fontSize: 12.0)),
+                                onTap: (){
+                                  addToCart(id, seller).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value))));
+                                },
+                            ),
                           ]
                         ]))
               ]))));

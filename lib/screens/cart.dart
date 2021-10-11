@@ -112,7 +112,7 @@ Widget _buildCard(String name, String price, String imgPath, String prodId, cont
                     child: Container(
                         height: 150.0,
                         width: 130.0,
-                        child: Image.network(imgPath))),
+                        child: (imgPath!="no") ? Image.network(imgPath):Image.asset('servicePic.jpg'))),
 
                 Text(price,
                     style: TextStyle(
