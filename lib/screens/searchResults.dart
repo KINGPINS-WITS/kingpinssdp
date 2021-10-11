@@ -25,89 +25,19 @@ class _searchResultsState extends State<searchResults> {
         backgroundColor: Colors.blue[900],
         title: Text('SEARCH RESULTS'),
       ),
-      body:Column(
-          children: [
-            SizedBox(height: 30,),
-            Container(
-              height: 450,
-              width: 350,
-              margin: EdgeInsets.only(left: 29),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                      child: Material(
-                      child: Container(
-                      height: 180,
-                      decoration: BoxDecoration(
-                        color: Colors.blue[900],
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            offset: new Offset(-10.0, 10.0),
-                            blurRadius: 20,
-                            spreadRadius: 4.0,
-                          )
-                        ]
-                      ),
-                    ),
-                  )),
-                  Positioned(
-                    top: 0,
-                      child: Card(
-                        elevation: 10,
-                        shadowColor: Colors.grey.withOpacity(0.5),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 200,
-                          width: 150,
-                          child: Image.network(Product.image,
-                          ),
-                          ),
-                        ),
-                      ),
-                  Positioned(
-                    top: 35,
-                      left: 160,
-                      child: Container(
-                        height: 150,
-                        width: 180,
-                        child: Column(
-                          children: [
-                              Text(Product.name,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              ),
-                            Text("R "+Product.price,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            Divider(color: Colors.grey,),
-                            Text("sold by: "+Product.seller,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ))
-                ],
-              ),
-            )
-          ],
-          ),
+      body: Column(
+        children: [
+          SizedBox(height: 25,),
+          Container(
+            margin: EdgeInsets.only(left: 15),
+            width: 300,
+            height: 300,
+            child: _buildCard(name, price, image, context),
+          )
+
+        ],
+
+      ),
     );
   }
 }
@@ -122,6 +52,57 @@ class Book{
     this.price=price;
     this.image= image;
   }
+}
+
+Widget _buildCard(String name, String price, String imgPath, context) {
+  return Padding(
+      padding: EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
+      child: InkWell(
+          onTap: () {},
+          child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3.0,
+                        blurRadius: 5.0)
+                  ],
+                  color: Colors.white),
+              child: Column(children: [
+
+                Container(
+                    padding: EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 5),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(Icons.delete , color: Colors.red)
+                        ])),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                    child: Container(
+                        height: 150.0,
+                        width: 130.0,
+                        child: Image.network(imgPath))),
+
+                Text("R "+price,
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontFamily: 'Varela',
+                        fontSize: 18.0)),
+                Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Container(color: Colors.blue, height: 1.0)),
+                Text(name,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Varela',
+                        fontSize: 14.0)),
+                // Padding(
+
+              ]))));
 }
 
 

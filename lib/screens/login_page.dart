@@ -10,6 +10,7 @@ import 'package:kingpinssdp/current_user.dart';
 import 'package:kingpinssdp/signup.dart';
 
 import '../homepage.dart';
+import 'add_funds.dart';
 
 class LoginPage extends StatefulWidget{
   const LoginPage({Key? key}) : super(key: key);

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:kingpinssdp/current_user.dart';
 import 'dart:math';
 
+import 'add_funds.dart';
+
 class ProfilePage extends StatefulWidget{
   const ProfilePage({Key? key}) : super(key: key);
   @override
@@ -121,9 +123,21 @@ class ProfilePageState extends State<ProfilePage>{
 
                                 ),
                                 child: Center(
-                                  child: Text(
-                                    '$fundsController',
-                                    style: TextStyle(fontSize: 22, color: Colors.black, height: 1.5),
+                                  child: FlatButton(
+                                    focusColor: Colors.blue,
+                                    hoverColor: Colors.blue,
+                                    splashColor: Colors.blue,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Addfunds()),
+                                      );
+                                    },
+                                    child: Text(
+                                      '$fundsController',
+                                      style: TextStyle(fontSize: 22, color: Colors.black, height: 1.5),
+                                    ),
                                   ),
                                 ),
                               ),
