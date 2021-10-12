@@ -3,14 +3,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:kingpinssdp/Services/mentorship.dart';
 import 'package:kingpinssdp/Services/tutor.dart';
 import 'package:kingpinssdp/products/books.dart';
 import 'package:kingpinssdp/screens/profile.dart';
 import 'package:kingpinssdp/screens/cart.dart';
 import 'package:kingpinssdp/screens/searchResults.dart';
-
-import 'Services/repair.dart';
 import 'classes/product.dart';
 
 class HomePage extends StatefulWidget {
@@ -270,7 +267,7 @@ class _HomePageState extends State<HomePage>
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Tutoring(),
+                              builder: (context) => Tutoring("BOOK A TUTOR"),
                             ),
                           );
                         },
@@ -296,12 +293,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Repairing(),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Tutoring("LAPTOP REPAIRS"),
+                            ),
+                          );
                         },
                         child: Text(
                           'LAPTOP REPAIRS',
@@ -325,12 +322,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Mentoring(),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Tutoring("MENTORSHIP"),
+                            ),
+                          );
                         },
                         child: Text(
                           'MENTORSHIP',

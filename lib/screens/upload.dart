@@ -17,6 +17,8 @@ class DemoUploadImage extends StatefulWidget {
 
 class _DemoUploadImageState extends State<DemoUploadImage> {
   Uint8List? _image;
+  String? category;
+  String? _dropDownButtonvalue = 'No Item chosen';
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
@@ -40,7 +42,7 @@ class _DemoUploadImageState extends State<DemoUploadImage> {
     var response = await http.post(Uri.parse(url), body: {
       "productName": nameController.text,
       "productPrice": priceController.text,
-      "category": categoryController.text,
+      "category": category,
       "image": img64,
       "seller": CurrentUser.email,
     });
@@ -99,9 +101,27 @@ class _DemoUploadImageState extends State<DemoUploadImage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: categoryController,
-                decoration: InputDecoration(labelText: 'CATEGORY'),
+              child: Text(_dropDownButtonvalue!),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+
+              child:DropdownButton<String>(
+                hint: Text('CATEGORY'),
+                items: <String>['BOOK A TUTOR', 'BOOKS', 'LAPTOP REPAIRS', 'MENTORSHIP','PERIPHERALS', 'STATIONERY'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _dropDownButtonvalue= value;
+                  });
+                  hint: Text(value!);
+                  category = value;
+                },
+
               ),
             ),
             IconButton(
