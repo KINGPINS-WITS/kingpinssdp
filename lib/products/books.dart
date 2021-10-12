@@ -2,16 +2,36 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:kingpinssdp/Services/tutor.dart';
+import 'package:kingpinssdp/current_user.dart';
 
 class AllPersonData extends StatefulWidget {
+  String? _cat;
+  AllPersonData(String cat) {
+    this._cat = cat;
+  }
   @override
-  _AllPersonDataState createState() => _AllPersonDataState();
+  _AllPersonDataState createState() => _AllPersonDataState(_cat!);
 }
 
 class _AllPersonDataState extends State<AllPersonData> {
+  String? _cat;
+  _AllPersonDataState(String cat) {
+    this._cat = cat;
+  }
+  Future<String> addToCart(String id, String seller) async {
+    String buyer = CurrentUser.email;
+    var url =
+        "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/add_to_cart.php?buyerEmail=$buyer&sellerEmail=$seller&productId=$id";
+    var response = await http.get(Uri.parse(url));
+    return response.body;
+  }
+
   Future allPerson() async {
     var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll.php";
-    var response = await http.get(Uri.parse(url));
+    var response = await http.post(Uri.parse(url), body: {
+      "category": _cat,
+    });
     return json.decode(response.body);
   }
 
@@ -25,7 +45,7 @@ class _AllPersonDataState extends State<AllPersonData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BOOKS'),
+        title: Text(_cat!),
       ),
       body: FutureBuilder(
         initialData: [],
@@ -53,6 +73,8 @@ class _AllPersonDataState extends State<AllPersonData> {
                       height: MediaQuery.of(context).size.height - 20.0,
 
                       child: _buildCard(
+                          list[index]['id'],
+                          list[index]['seller'],
                           list[index]['description'],
                           "R" + list[index]['price'],
                           list[index]['image'],
@@ -71,8 +93,8 @@ class _AllPersonDataState extends State<AllPersonData> {
   }
 }
 
-Widget _buildCard(String name, String price, String imgPath, bool added,
-    bool isFavorite, context) {
+Widget _buildCard(String id, String seller, String name, String price,
+    String imgPath, bool added, bool isFavorite, context) {
   return Padding(
       padding: EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
       child: InkWell(
@@ -123,20 +145,34 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
                           if (!added) ...[
                             Icon(Icons.shopping_basket,
                                 color: Colors.green, size: 12.0),
-                            Text('Add to cart',
-                                style: TextStyle(
-                                    fontFamily: 'Varela',
-                                    color: Colors.blue,
-                                    fontSize: 12.0))
+                            InkWell(
+                              child: Text('Add to cart',
+                                  style: TextStyle(
+                                      fontFamily: 'Varela',
+                                      color: Colors.blue,
+                                      fontSize: 12.0)),
+                              onTap: () {
+                                addToCart(id, seller).then((value) =>
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text(value))));
+                              },
+                            ),
                           ],
                           if (added) ...[
                             Icon(Icons.shopping_basket,
                                 color: Colors.blue, size: 12.0),
-                            Text('Add to cart',
-                                style: TextStyle(
-                                    fontFamily: 'Varela',
-                                    color: Colors.blue,
-                                    fontSize: 12.0))
+                            InkWell(
+                              child: Text('Add to cart',
+                                  style: TextStyle(
+                                      fontFamily: 'Varela',
+                                      color: Colors.blue,
+                                      fontSize: 12.0)),
+                              onTap: () {
+                                addToCart(id, seller).then((value) =>
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text(value))));
+                              },
+                            ),
                           ]
                         ]))
               ]))));

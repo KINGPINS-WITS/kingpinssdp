@@ -4,14 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:kingpinssdp/Services/mentorship.dart';
 import 'package:kingpinssdp/Services/tutor.dart';
 import 'package:kingpinssdp/products/books.dart';
 import 'package:kingpinssdp/screens/profile.dart';
 import 'package:kingpinssdp/screens/cart.dart';
 import 'package:kingpinssdp/screens/searchResults.dart';
-
-import 'Services/repair.dart';
 import 'classes/product.dart';
 
 class HomePage extends StatefulWidget {
@@ -135,23 +132,20 @@ class _HomePageState extends State<HomePage>
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => Cart()),
+                  MaterialPageRoute(builder: (context) => Cart()),
                 );
               },
             ),
             IconButton(
-              icon: Icon(
-                Icons.person,
-              ),
-              onPressed: () {
+                icon: Icon(
+                  Icons.person,
+                ),
+                onPressed: () {
                   Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ProfilePage()),
-                );
-              }
-            )
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                })
           ],
           bottom: new PreferredSize(
             preferredSize: new Size(600.0, 30.0),
@@ -190,7 +184,15 @@ class _HomePageState extends State<HomePage>
                           focusColor: Colors.blue,
                           hoverColor: Colors.blue,
                           splashColor: Colors.blue,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AllPersonData("STATIONERY"),
+                              ),
+                            );
+                          },
                           child: Text(
                             'STATIONERY',
                             style: TextStyle(
@@ -212,7 +214,15 @@ class _HomePageState extends State<HomePage>
                           focusColor: Colors.blue,
                           hoverColor: Colors.blue,
                           splashColor: Colors.blue,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AllPersonData("PERIPHERALS"),
+                              ),
+                            );
+                          },
                           child: Text(
                             'PERIPHERALS',
                             style: TextStyle(
@@ -231,7 +241,7 @@ class _HomePageState extends State<HomePage>
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AllPersonData(),
+                                builder: (context) => AllPersonData("BOOKS"),
                               ),
                             );
                           },
@@ -280,7 +290,7 @@ class _HomePageState extends State<HomePage>
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Tutoring(),
+                              builder: (context) => Tutoring("BOOK A TUTOR"),
                             ),
                           );
                         },
@@ -306,12 +316,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Repairing(),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Tutoring("LAPTOP REPAIRS"),
+                            ),
+                          );
                         },
                         child: Text(
                           'LAPTOP REPAIRS',
@@ -335,12 +345,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Mentoring(),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Tutoring("MENTORSHIP"),
+                            ),
+                          );
                         },
                         child: Text(
                           'MENTORSHIP',
@@ -359,29 +369,31 @@ class _HomePageState extends State<HomePage>
                 ),
               ],
             )),
-            
             Center(
                 child: Column(
-                  children: [
-                    Row(children: [
-                      SizedBox(
-                        height: 50,
-                        width: 200,
-                      ),
-                    ]),
-
-                    RichText(
-                      text: TextSpan(
-                        style: DefaultTextStyle.of(context).style,
-                        children: const <TextSpan>[
-                          TextSpan(text: 'This is a platform for students to be able to collaborate to be able to purchase textbooks and provide services to students. StuMarket’s main goal is to make it easy for students to find and buy textbooks and should be able to see a list of textbooks they might want to buy. They should be able to find the textbooks in the category in which the textbooks are in. StuMarket also provides student services.', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 25)),
-
-                        ],
-                      ),
-                    )
-
-                  ],
-                )),
+              children: [
+                Row(children: [
+                  SizedBox(
+                    height: 50,
+                    width: 200,
+                  ),
+                ]),
+                RichText(
+                  text: TextSpan(
+                    style: DefaultTextStyle.of(context).style,
+                    children: const <TextSpan>[
+                      TextSpan(
+                          text:
+                              'This is a platform for students to be able to collaborate to be able to purchase textbooks and provide services to students. StuMarket’s main goal is to make it easy for students to find and buy textbooks and should be able to see a list of textbooks they might want to buy. They should be able to find the textbooks in the category in which the textbooks are in. StuMarket also provides student services.',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 25)),
+                    ],
+                  ),
+                )
+              ],
+            )),
           ],
         ),
       ),

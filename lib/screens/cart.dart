@@ -3,18 +3,28 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:kingpinssdp/current_user.dart';
+import 'package:kingpinssdp/screens/receipt.dart';
 
 class Cart extends StatefulWidget {
   @override
   _Cart createState() => _Cart();
 }
 
+Future<String> doCheckout(String jsonString) async {
+  String buyer = CurrentUser.email;
+  var url = "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/checkout.php?buyerEmail=$buyer&jsonString=$jsonString";
+  var response = await http.get(Uri.parse(url));
+  return response.body;
+}
+
 class _Cart extends State<Cart> {
+  String jsonString = "";
+  double totalDue = 0;
   Future loadCart(String buyerEmail) async {
     var url = "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/load_cart.php?buyerEmail=$buyerEmail";
     var response = await http.get(Uri.parse(url));
     
-    // AsyncSnapshot<dynamic> a;
+    jsonString = response.body;
     try{
       return json.decode(response.body);
     }on FormatException{
@@ -25,6 +35,7 @@ class _Cart extends State<Cart> {
   @override
   void initState() {
     super.initState();
+    totalDue = 0;
     loadCart(CurrentUser.email);
   }
 
@@ -51,6 +62,7 @@ class _Cart extends State<Cart> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
                     List list = snapshot.data;
+                    totalDue += double.parse(list[index]['price']);
                     return Container(
                       // width: 130,
                       // height: 300,
@@ -75,6 +87,34 @@ class _Cart extends State<Cart> {
                         fontSize: 25.0)),
                 );
           // }
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text("Checkout"),
+        icon: const Icon(Icons.double_arrow_sharp),
+        backgroundColor: Colors.blue,
+        onPressed: (){
+          if(double.parse(CurrentUser.funds) >= totalDue){
+            doCheckout(jsonString).then((value){
+              if(value=="Cart cleared."){
+                double newFunds = (double.parse(CurrentUser.funds) - totalDue);
+                CurrentUser.funds = newFunds.toString();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReceiptPage(jsonCartitems: jsonString, totalDue: totalDue,)),
+                );
+              }
+              else{
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
+              }
+            });
+          }
+          else{
+            String bal = CurrentUser.funds;
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("You do not have enough funds. Your funds are R $bal, Items Cost R $totalDue")));
+          }
+          
         },
       ),
     );
@@ -112,7 +152,7 @@ Widget _buildCard(String name, String price, String imgPath, String prodId, cont
                     child: Container(
                         height: 150.0,
                         width: 130.0,
-                        child: Image.network(imgPath))),
+                        child: (imgPath!="no") ? Image.network(imgPath):Image.asset('servicePic.jpg'))),
 
                 Text(price,
                     style: TextStyle(

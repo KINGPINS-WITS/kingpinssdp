@@ -46,6 +46,7 @@ dependencies:
 
   #State manager
   provider: ^5.0.0
+  image_picker_web: any
 
 dev_dependencies:
   test: any

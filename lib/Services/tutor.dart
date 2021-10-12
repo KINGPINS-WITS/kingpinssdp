@@ -2,16 +2,34 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:kingpinssdp/current_user.dart';
 
 class Tutoring extends StatefulWidget {
+  String? multiple;
+  Tutoring(String multiple) {
+    this.multiple = multiple;
+  }
   @override
-  _TutoringState createState() => _TutoringState();
+  _TutoringState createState() => _TutoringState(multiple!);
+}
+
+Future<String> addToCart(String id, String seller) async {
+  String buyer = CurrentUser.email;
+  var url = "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/add_to_cart.php?buyerEmail=$buyer&sellerEmail=$seller&productId=$id";
+  var response = await http.get(Uri.parse(url));
+  return response.body;
 }
 
 class _TutoringState extends State<Tutoring> {
+  String? multiple;
+  _TutoringState(String multiple) {
+    this.multiple = multiple;
+  }
   Future allPerson() async {
-    var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll2.php";
-    var response = await http.get(Uri.parse(url));
+    var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll.php";
+    var response = await http.post(Uri.parse(url), body: {
+      "category": multiple,
+    });
     return json.decode(response.body);
   }
 
@@ -25,7 +43,7 @@ class _TutoringState extends State<Tutoring> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tutors'),
+        title: Text(multiple!),
       ),
       body: FutureBuilder(
         future: allPerson(),
@@ -38,7 +56,7 @@ class _TutoringState extends State<Tutoring> {
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                childAspectRatio: (1/ 1),
+                childAspectRatio: (1/ 0.3),
               ),
 
               itemCount: snapshot.data.length,
@@ -53,6 +71,8 @@ class _TutoringState extends State<Tutoring> {
                 // height: MediaQuery.of(context).size.height - 20.0,
 
                   child: _buildCard(
+                      list[index]['id'],
+                      list[index]['seller'],
                       list[index]['description'],
                       list[index]['price'],
                       false,
@@ -69,7 +89,7 @@ class _TutoringState extends State<Tutoring> {
   }
 }
 
-Widget _buildCard(String name, String price, bool added,
+Widget _buildCard(String id, String seller, String name, String price, bool added,
     bool isFavorite, context) {
   return Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
@@ -91,22 +111,28 @@ Widget _buildCard(String name, String price, bool added,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(Icons.favorite_border, color: Colors.green)
+                          Icon(Icons.favorite_border, color: Colors.blue)
                         ])),
 
-                Text(price,
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontFamily: 'Varela',
-                        fontSize: 14.0)),
                 Text(name,
                     style: TextStyle(
-                        color: Colors.green,
+                        color: Colors.blue,
                         fontFamily: 'Varela',
                         fontSize: 14.0)),
+                Text(price,
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontFamily: 'Varela',
+                        fontSize: 14.0)),
+              Text(seller,
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontFamily: 'Varela',
+                      fontSize: 14.0)
+              ),
                 Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Container(color: Colors.green, height: 1.0)),
+                    child: Container(color: Colors.blue, height: 1.0)),
                 Padding(
                     padding: EdgeInsets.only(left: 5.0, right: 5.0),
                     child: Row(
@@ -114,21 +140,31 @@ Widget _buildCard(String name, String price, bool added,
                         children: [
                           if (!added) ...[
                             Icon(Icons.shopping_basket,
-                                color: Colors.green, size: 12.0),
-                            Text('Add to cart',
+                                color: Colors.blue, size: 12.0),
+                            InkWell(
+                              child: Text('Add to cart',
                                 style: TextStyle(
                                     fontFamily: 'Varela',
-                                    color: Colors.green,
-                                    fontSize: 12.0))
+                                    color: Colors.blue,
+                                    fontSize: 12.0)),
+                                onTap: (){
+                                  addToCart(id, seller).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value))));
+                                },
+                            ),
                           ],
                           if (added) ...[
                             Icon(Icons.shopping_basket,
-                                color: Colors.green, size: 12.0),
-                            Text('Add to cart',
+                                color: Colors.blue, size: 12.0),
+                            InkWell(
+                              child: Text('Add to cart',
                                 style: TextStyle(
                                     fontFamily: 'Varela',
-                                    color: Colors.green,
-                                    fontSize: 12.0))
+                                    color: Colors.blue,
+                                    fontSize: 12.0)),
+                                onTap: (){
+                                  addToCart(id, seller).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value))));
+                                },
+                            ),
                           ]
                         ]))
               ]))));
