@@ -155,7 +155,7 @@ class ProfilePageState extends State<ProfilePage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              DemoUploadImage(),
+                                              //DemoUploadImage(),
                                         ),
                                       );
                                     },
