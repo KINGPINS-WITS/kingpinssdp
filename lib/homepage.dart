@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:kingpinssdp/Services/mentorship.dart';
@@ -24,6 +25,15 @@ class _HomePageState extends State<HomePage>
   int _selectedIndex = 0;
 
   TextEditingController searchController = TextEditingController();
+  bool contain(String query){
+    List description= ["CALCULAS","PHYLOSOPHY","HEALTHY BOOK", "Geography","Mathematics","peri","REPAIR","Modise"];
+    if(description.contains(query)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
   Future search() async {
     var url = "https://lamp.ms.wits.ac.za/home/s2280727/search.php";
@@ -31,10 +41,12 @@ class _HomePageState extends State<HomePage>
       "find": searchController.text,
     });
     var res = jsonDecode(response.body);
-    Product.name = res["description"];
-    Product.image = res["image"];
-    Product.price = res["price"];
-    Product.seller = res["seller"];
+    setState(() {
+      Product.name = res["description"];
+      Product.image = res["image"];
+      Product.price = res["price"];
+      Product.seller = res["seller"];
+    });
 
     print(Product.image);
   }
@@ -88,12 +100,23 @@ class _HomePageState extends State<HomePage>
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            search();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => searchResults()),
-                            );
+                            if(contain(searchController.text)){
+                              search();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => searchResults()),
+                              );
+                            }
+                            else{
+                              Fluttertoast.showToast(
+                                msg: "NO MATCHES FOUND",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                fontSize: 16.0,
+                              );
+                            }
+
                           }),
                     ),
                     hintText: "search",

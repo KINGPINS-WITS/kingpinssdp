@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kingpinssdp/screens/profile.dart';
 import '../current_user.dart';
 import 'package:http/http.dart' as http;
 
@@ -52,16 +53,17 @@ class AddfundsState extends State<Addfunds> {
       "email": CurrentUser.email,
       "funds": amount.text,
     });
+    res();
     Fluttertoast.showToast(
-      msg: "Success",
-      toastLength: Toast.LENGTH_SHORT,
+      msg: "SUCCESS",
+      toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.CENTER,
       fontSize: 16.0,
     );
-    res();
+
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => ProfilePage()),
     );
 
 
@@ -182,7 +184,6 @@ class AddfundsState extends State<Addfunds> {
                       onPressed: () {
                         if(isNumeric(amount.text)){
                           addFunds(context);
-                          print(CurrentUser.funds);
                         }
                         else{
                           Fluttertoast.showToast(

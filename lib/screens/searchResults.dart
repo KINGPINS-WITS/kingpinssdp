@@ -11,12 +11,21 @@ class searchResults extends StatefulWidget {
 }
 
 class _searchResultsState extends State<searchResults> {
-  String name= Product.name;
-  String image= Product.image;
-  String price= Product.price;
+  String name=" ";
+  String image=" ";
+  String price=" ";
 
-  List<Book> books = [Book(Product.name,Product.price,Product.image)];
+  void initial(){
+    name= Product.name;
+    image= Product.image;
+    price= Product.price;
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    initial();
+  }
 
   @override
   Widget build(BuildContext context) {
