@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:kingpinssdp/Services/tutor.dart';
 import 'package:kingpinssdp/current_user.dart';
+import 'package:kingpinssdp/screens/rate.dart';
 
 class AllPersonData extends StatefulWidget {
   String? _cat;
@@ -145,6 +146,23 @@ Widget _buildCard(String id, String seller, String name, String price,
                           if (!added) ...[
                             Icon(Icons.shopping_basket,
                                 color: Colors.green, size: 12.0),
+                            InkWell(
+                                child: Text('Rate',
+                                    style: TextStyle(
+                                        fontFamily: 'Varela',
+                                        color: Colors.blue,
+                                        fontSize: 12.0
+                                    )
+                                ),
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Rate()
+                                  ),
+                                );
+                              },
+                            ),
                             InkWell(
                               child: Text('Add to cart',
                                   style: TextStyle(
