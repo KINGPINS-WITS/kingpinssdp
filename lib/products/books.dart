@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:kingpinssdp/Services/tutor.dart';
 import 'package:kingpinssdp/current_user.dart';
 import 'package:kingpinssdp/screens/rate.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AllPersonData extends StatefulWidget {
   String? _cat;
@@ -15,6 +16,18 @@ class AllPersonData extends StatefulWidget {
   _AllPersonDataState createState() => _AllPersonDataState(_cat!);
 }
 
+Future sendMessage(String message, String receiver) async{
+  String sender = CurrentUser.email;
+  var url =
+      "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/sendtext.php";
+  var response = await http.post(Uri.parse(url), body: {
+    "sender": sender,
+    "message": message,
+    "receiver": receiver,
+  });
+  //print(response.body);
+}
+TextEditingController message= TextEditingController();
 class _AllPersonDataState extends State<AllPersonData> {
   String? _cat;
   _AllPersonDataState(String cat) {
@@ -27,6 +40,8 @@ class _AllPersonDataState extends State<AllPersonData> {
     var response = await http.get(Uri.parse(url));
     return response.body;
   }
+
+
 
   Future allPerson() async {
     var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll.php";
@@ -56,37 +71,37 @@ class _AllPersonDataState extends State<AllPersonData> {
           //
           return snapshot.hasData
               ? GridView.builder(
-                  physics: ScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: (3 / 3),
-                  ),
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    List list = snapshot.data;
+              physics: ScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: (3 / 3),
+              ),
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                List list = snapshot.data;
 
-                    return Container(
-                      // width: 130,
-                      // height: 300,
-                      padding: EdgeInsets.only(right: 10.0),
-                      width: MediaQuery.of(context).size.width - 10.0,
-                      height: MediaQuery.of(context).size.height - 20.0,
+                return Container(
+                  // width: 130,
+                  // height: 300,
+                  padding: EdgeInsets.only(right: 10.0),
+                  width: MediaQuery.of(context).size.width - 10.0,
+                  height: MediaQuery.of(context).size.height - 20.0,
 
-                      child: _buildCard(
-                          list[index]['id'],
-                          list[index]['seller'],
-                          list[index]['description'],
-                          "R" + list[index]['price'],
-                          list[index]['image'],
-                          false,
-                          false,
-                          context),
-                    );
-                  })
-              : Center(
-                  child: CircularProgressIndicator(),
+                  child: _buildCard(
+                      list[index]['id'],
+                      list[index]['seller'],
+                      list[index]['description'],
+                      "R" + list[index]['price'],
+                      list[index]['image'],
+                      false,
+                      false,
+                      context),
                 );
+              })
+              : Center(
+            child: CircularProgressIndicator(),
+          );
           // }
         },
       ),
@@ -115,8 +130,54 @@ Widget _buildCard(String id, String seller, String name, String price,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                      Icon(Icons.favorite_border, color: Colors.blue)
-                    ])),
+                          IconButton(
+                              icon: Icon(Icons.send,
+                                  color: Colors.blue),
+                              onPressed: (){
+                                showDialog(context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text("Send a message"),
+                                        content: TextField(
+                                          controller: message,
+                                          decoration: InputDecoration(
+                                            hintText: "message text",
+
+                                          ),
+                                        ),
+                                        actions: [
+                                          FlatButton(onPressed: (){
+                                            Navigator.pop(context);
+                                          },
+                                              child: Text("Cancel")),
+                                          FlatButton(onPressed: (){
+                                            if(message.text == "" ){
+                                              Fluttertoast.showToast(
+                                                msg: "Enter the message you trynna send",
+                                                toastLength: Toast.LENGTH_LONG,
+                                                gravity: ToastGravity.CENTER,
+                                                fontSize: 16.0,
+                                              );
+                                            }
+                                            else if(seller == CurrentUser.email){
+                                              Fluttertoast.showToast(
+                                                msg: "You can't send yourself a message",
+                                                toastLength: Toast.LENGTH_LONG,
+                                                gravity: ToastGravity.CENTER,
+                                                fontSize: 16.0,
+                                              );
+                                            }
+                                            else{
+                                              sendMessage(message.text, seller);
+                                            }
+                                          },
+                                              child: Text("Send"))
+                                        ],
+                                      );
+                                    });
+                              }
+                          )
+                        ])),
                 SizedBox(
                   height: 20,
                 ),
@@ -147,13 +208,13 @@ Widget _buildCard(String id, String seller, String name, String price,
                             Icon(Icons.shopping_basket,
                                 color: Colors.green, size: 12.0),
                             InkWell(
-                                child: Text('Rate',
-                                    style: TextStyle(
-                                        fontFamily: 'Varela',
-                                        color: Colors.blue,
-                                        fontSize: 12.0
-                                    )
-                                ),
+                              child: Text('Rate',
+                                  style: TextStyle(
+                                      fontFamily: 'Varela',
+                                      color: Colors.blue,
+                                      fontSize: 12.0
+                                  )
+                              ),
                               onTap: (){
                                 Navigator.push(
                                   context,
