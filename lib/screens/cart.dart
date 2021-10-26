@@ -17,6 +17,17 @@ Future<String> doCheckout(String jsonString) async {
   return response.body;
 }
 
+
+Future<String> removeFromCart(String seller, String id) async {
+  String buyer = CurrentUser.email;
+  var url = "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/remove_from_cart.php?buyerEmail=$buyer&sellerEmail=$seller&productId=$id";
+  final res = await http.post(
+    Uri.parse(url),
+    );
+  
+  return res.body;
+}
+
 class _Cart extends State<Cart> {
   String jsonString = "";
   double totalDue = 0;
@@ -71,6 +82,7 @@ class _Cart extends State<Cart> {
                       height: MediaQuery.of(context).size.height - 20.0,
                       
                       child: _buildCard(
+                          list[index]['seller'],
                           list[index]['description'],
                           "R " + list[index]['price'],
                           list[index]['image'],
@@ -121,7 +133,7 @@ class _Cart extends State<Cart> {
   }
 }
 
-Widget _buildCard(String name, String price, String imgPath, String prodId, context) {
+Widget _buildCard(String seller, String name, String price, String imgPath, String prodId, context) {
   return Padding(
       padding: EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
       child: InkWell(
@@ -143,7 +155,22 @@ Widget _buildCard(String name, String price, String imgPath, String prodId, cont
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                      Icon(Icons.delete , color: Colors.red)
+                      IconButton(
+                        icon: Icon(Icons.delete , color: Colors.red),
+                        onPressed: (){
+                          
+                          removeFromCart(seller, prodId).then((value){
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Cart()),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text(value)));
+                          });
+                          
+                        },
+                      )
                     ])),
                 SizedBox(
                   height: 20,
