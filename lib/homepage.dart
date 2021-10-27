@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:kingpinssdp/Services/tutor.dart';
+import 'package:kingpinssdp/messages.dart';
 import 'package:kingpinssdp/products/books.dart';
 import 'package:kingpinssdp/screens/profile.dart';
 import 'package:kingpinssdp/screens/cart.dart';
@@ -22,12 +22,20 @@ class _HomePageState extends State<HomePage>
   int _selectedIndex = 0;
 
   TextEditingController searchController = TextEditingController();
-  bool contain(String query){
-    List description= ["CALCULAS","PHYLOSOPHY","HEALTHY BOOK", "Geography","Mathematics","peri","REPAIR","Modise"];
-    if(description.contains(query)){
+  bool contain(String query) {
+    List description = [
+      "CALCULAS",
+      "PHYLOSOPHY",
+      "HEALTHY BOOK",
+      "Geography",
+      "Mathematics",
+      "peri",
+      "REPAIR",
+      "Modise"
+    ];
+    if (description.contains(query)) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
@@ -69,6 +77,8 @@ class _HomePageState extends State<HomePage>
     });
   }
 
+  int counter = 2;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -97,15 +107,14 @@ class _HomePageState extends State<HomePage>
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            if(contain(searchController.text)){
+                            if (contain(searchController.text)) {
                               search();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => searchResults()),
                               );
-                            }
-                            else{
+                            } else {
                               Fluttertoast.showToast(
                                 msg: "NO MATCHES FOUND",
                                 toastLength: Toast.LENGTH_LONG,
@@ -113,7 +122,6 @@ class _HomePageState extends State<HomePage>
                                 fontSize: 16.0,
                               );
                             }
-
                           }),
                     ),
                     hintText: "search",
@@ -136,6 +144,44 @@ class _HomePageState extends State<HomePage>
                 );
               },
             ),
+            IconButton(
+                icon: Icon(
+                  Icons.message,
+                ),
+                onPressed: () {
+                  setState(() {
+                    counter = 0;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Messeges()),
+                  );
+                }),
+            // counter != 0
+            //     ? new Positioned(
+            //         right: 11,
+            //         top: 11,
+            //         child: new Container(
+            //           padding: EdgeInsets.all(2),
+            //           decoration: new BoxDecoration(
+            //             color: Colors.red,
+            //             borderRadius: BorderRadius.circular(6),
+            //           ),
+            //           constraints: BoxConstraints(
+            //             minWidth: 14,
+            //             minHeight: 14,
+            //           ),
+            //           child: Text(
+            //             '$counter',
+            //             style: TextStyle(
+            //               color: Colors.white,
+            //               fontSize: 8,
+            //             ),
+            //             textAlign: TextAlign.center,
+            //           ),
+            //         ),
+            //       )
+            //     : new Container(),
             IconButton(
                 icon: Icon(
                   Icons.person,
@@ -287,12 +333,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Tutoring("BOOK A TUTOR"),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //  //  builder: (context) => Tutoring("BOOK A TUTOR"),
+                          //   ),
+                          // );
                         },
                         child: Text(
                           'BOOK A TUTOR',
@@ -316,12 +362,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Tutoring("LAPTOP REPAIRS"),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => Tutoring("LAPTOP REPAIRS"),
+                          //   ),
+                          // );
                         },
                         child: Text(
                           'LAPTOP REPAIRS',
@@ -345,12 +391,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Tutoring("MENTORSHIP"),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => Tutoring("MENTORSHIP"),
+                          //   ),
+                          // );
                         },
                         child: Text(
                           'MENTORSHIP',
