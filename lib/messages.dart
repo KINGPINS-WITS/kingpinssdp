@@ -1,14 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:kingpinssdp/current_user.dart';
+import 'package:kingpinssdp/products/books.dart';
 
 class Messeges extends StatefulWidget {
   @override
   _MessegesState createState() => _MessegesState();
 }
-
+TextEditingController reply= TextEditingController();
 class _MessegesState extends State<Messeges> {
   Future allPerson() async {
     var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll2.php";
@@ -77,8 +79,57 @@ class _MessegesState extends State<Messeges> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               TextButton(
-                                child: const Text('Send message'),
-                                onPressed: () {/* ... */},
+                                child: const Text('reply'),
+                                onPressed: () {
+                                  showDialog(context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Text("Send a message"),
+                                          content: TextField(
+                                            controller: reply,
+                                            decoration: InputDecoration(
+                                              hintText: "message text",
+
+                                            ),
+                                          ),
+                                          actions: [
+                                            FlatButton(onPressed: (){
+                                              Navigator.pop(context);
+                                            },
+                                                child: Text("Cancel")),
+                                            FlatButton(onPressed: (){
+                                              if(reply.text == "" ){
+                                                Fluttertoast.showToast(
+                                                  msg: "Enter the message you trynna send",
+                                                  toastLength: Toast.LENGTH_LONG,
+                                                  gravity: ToastGravity.CENTER,
+                                                  fontSize: 16.0,
+                                                );
+                                              }
+                                              else if(list[index]['SENDER'] == CurrentUser.email){
+                                                Fluttertoast.showToast(
+                                                  msg: "You can't send yourself a message",
+                                                  toastLength: Toast.LENGTH_LONG,
+                                                  gravity: ToastGravity.CENTER,
+                                                  fontSize: 16.0,
+                                                );
+                                              }
+                                              else{
+                                                sendMessage(reply.text, list[index]['SENDER']);
+                                                Fluttertoast.showToast(
+                                                  msg: "message sent",
+                                                  toastLength: Toast.LENGTH_LONG,
+                                                  gravity: ToastGravity.CENTER,
+                                                  fontSize: 16.0,
+                                                );
+                                                Navigator.pop(context);
+                                              }
+                                            },
+                                                child: Text("Send"))
+                                          ],
+                                        );
+                                      });
+                                },
                               ),
                               const SizedBox(width: 8),
                             ],

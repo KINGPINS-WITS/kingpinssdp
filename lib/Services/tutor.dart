@@ -153,6 +153,13 @@ Widget _buildCard(String id, String seller, String name, String price, bool adde
                                             }
                                             else{
                                               sendMessage(text.text, seller);
+                                              Fluttertoast.showToast(
+                                                msg: "message sent",
+                                                toastLength: Toast.LENGTH_LONG,
+                                                gravity: ToastGravity.CENTER,
+                                                fontSize: 16.0,
+                                              );
+                                              Navigator.pop(context);
                                             }
 
                                           },
