@@ -9,6 +9,7 @@ import 'package:kingpinssdp/products/books.dart';
 import 'package:kingpinssdp/screens/profile.dart';
 import 'package:kingpinssdp/screens/cart.dart';
 import 'package:kingpinssdp/screens/searchResults.dart';
+import 'Services/tutor.dart';
 import 'classes/product.dart';
 
 class HomePage extends StatefulWidget {
@@ -333,12 +334,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //  //  builder: (context) => Tutoring("BOOK A TUTOR"),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                            builder: (context) => Tutoring("BOOK A TUTOR"),
+                            ),
+                          );
                         },
                         child: Text(
                           'BOOK A TUTOR',
@@ -362,12 +363,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Tutoring("LAPTOP REPAIRS"),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Tutoring("LAPTOP REPAIRS"),
+                            ),
+                          );
                         },
                         child: Text(
                           'LAPTOP REPAIRS',
@@ -391,12 +392,12 @@ class _HomePageState extends State<HomePage>
                         hoverColor: Colors.blue,
                         splashColor: Colors.blue,
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Tutoring("MENTORSHIP"),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Tutoring("MENTORSHIP"),
+                            ),
+                          );
                         },
                         child: Text(
                           'MENTORSHIP',
