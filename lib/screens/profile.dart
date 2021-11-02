@@ -150,14 +150,14 @@ class ProfilePageState extends State<ProfilePage> {
                                 Center(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Respond to button press
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              DemoUploadImage(),
-                                        ),
-                                      );
+                                      // // Respond to button press
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) =>
+                                      //         DemoUploadImage(),
+                                      //   ),
+                                      // );
                                     },
                                     child: Text('Upload an add'),
                                   ),
