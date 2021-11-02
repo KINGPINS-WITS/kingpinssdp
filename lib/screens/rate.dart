@@ -26,7 +26,7 @@ TextEditingController reply = TextEditingController();
 
 class _ReviewsState extends State<Reviews> {
   String? proId, proName, proPrice, proImage, proSeller;
-  double rate = 3;
+  double rate = 0, total = 1;
   _ReviewsState(String proId, String proImage, String proName, String proPrice,
       String proSeller) {
     this.proId = proId;
@@ -86,12 +86,33 @@ class _ReviewsState extends State<Reviews> {
             child: const Text('Add To Cart'),
             onPressed: () {
               //print(proId!);
-              print(rate);
+
               addToCart(proId!, proSeller!).then((value) =>
                   ScaffoldMessenger.of(context)
                       .showSnackBar(SnackBar(content: Text(value))));
             },
           ),
+          TextButton(
+            child: const Text('Update rating'),
+            onPressed: () {
+              if (total != 0) {
+                setState(() {
+                  rate = rate / total;
+                });
+              }
+            },
+          ),
+          Center(
+              child: RatingBarIndicator(
+            rating: rate,
+            itemBuilder: (context, index) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            itemCount: 5,
+            itemSize: 50.0,
+            //direction: Axis.horizontal,
+          )),
           SizedBox(height: 20.0),
           FutureBuilder(
             future: allPerson(),
@@ -109,10 +130,13 @@ class _ReviewsState extends State<Reviews> {
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         List list = snapshot.data;
-                        for (int i = 0; i < snapshot.data.length; i++) {
-                          rate += double.parse(list[i]['RATING']);
-                        }
-                        rate = snapshot.data.length;
+                        //for (int i = 0; i < snapshot.data.length; i++) {
+                        rate += double.parse(list[index]['RATING']);
+                        // print();
+                        //}
+                        //rate = rate /
+                        //;
+                        total = snapshot.data.length;
 
                         return Card(
                           child: Column(
@@ -132,17 +156,6 @@ class _ReviewsState extends State<Reviews> {
                     );
             },
           ),
-          Center(
-              child: RatingBarIndicator(
-            rating: rate,
-            itemBuilder: (context, index) => Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
-            itemCount: 5,
-            itemSize: 50.0,
-            //direction: Axis.horizontal,
-          )),
         ]));
   }
 }
