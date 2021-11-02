@@ -10,11 +10,11 @@ import 'package:kingpinssdp/screens/login_page.dart';
 import 'package:kingpinssdp/screens/profile.dart';
 import 'package:kingpinssdp/screens/cart.dart';
 import 'package:kingpinssdp/screens/searchResults.dart';
-<<<<<<< Updated upstream
+
 import 'Services/tutor.dart';
-=======
+
 import 'package:shared_preferences/shared_preferences.dart';
->>>>>>> Stashed changes
+
 import 'classes/product.dart';
 
 class HomePage extends StatefulWidget {
