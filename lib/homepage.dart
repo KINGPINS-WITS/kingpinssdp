@@ -6,10 +6,15 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:kingpinssdp/messages.dart';
 import 'package:kingpinssdp/products/books.dart';
+import 'package:kingpinssdp/screens/login_page.dart';
 import 'package:kingpinssdp/screens/profile.dart';
 import 'package:kingpinssdp/screens/cart.dart';
 import 'package:kingpinssdp/screens/searchResults.dart';
+<<<<<<< Updated upstream
 import 'Services/tutor.dart';
+=======
+import 'package:shared_preferences/shared_preferences.dart';
+>>>>>>> Stashed changes
 import 'classes/product.dart';
 
 class HomePage extends StatefulWidget {
@@ -79,6 +84,48 @@ class _HomePageState extends State<HomePage>
   }
 
   int counter = 2;
+
+  showAlertDialog(BuildContext context) {
+
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("Cancel"),
+      onPressed:  () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage()),
+        );
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text("Yes, log off"),
+      onPressed:  () async{
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.remove('email');
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext ctx) => LoginPage()));
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Log off"),
+      content: Text("Are you sure you want to log off?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +239,13 @@ class _HomePageState extends State<HomePage>
                     context,
                     MaterialPageRoute(builder: (context) => ProfilePage()),
                   );
+                }),
+            IconButton(
+                icon: Icon(
+                  Icons.power_settings_new_outlined,
+                ),
+                onPressed: () {
+                    showAlertDialog(context);
                 })
           ],
           bottom: new PreferredSize(
