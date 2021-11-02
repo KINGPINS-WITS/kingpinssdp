@@ -15,21 +15,20 @@ class Addfunds extends StatefulWidget {
 }
 
 class AddfundsState extends State<Addfunds> {
-
-  void res(){
-    String str1= CurrentUser.funds;
-    String str2= amount.text;
-    var num1=num.tryParse(str1);
-    var num2=num.tryParse(str2);
-    num ans=0;
-    if(num2 != null && num1 != null){
-      ans=(num1 + num2);
+  void res() {
+    String str1 = CurrentUser.funds;
+    String str2 = amount.text;
+    var num1 = num.tryParse(str1);
+    var num2 = num.tryParse(str2);
+    num ans = 0;
+    if (num2 != null && num1 != null) {
+      ans = (num1 + num2);
     }
     setState(() {
-      CurrentUser.funds="$ans";
+      CurrentUser.funds = "$ans";
     });
-
   }
+
   //checks if a enter value is numeric
   bool isNumeric(String string) {
     // Null or empty string is not a number
@@ -47,8 +46,7 @@ class AddfundsState extends State<Addfunds> {
 
   //http request
   Future addFunds(BuildContext context) async {
-    var url =
-        "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/add_funds.php";
+    var url = "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/add_funds.php";
     var response = await http.post(Uri.parse(url), body: {
       "email": CurrentUser.email,
       "funds": amount.text,
@@ -66,9 +64,7 @@ class AddfundsState extends State<Addfunds> {
       MaterialPageRoute(builder: (context) => ProfilePage()),
     );
 
-
     // if (data == "Balance Updated") {
-
 
     // } else {
     //   Fluttertoast.showToast(
@@ -106,7 +102,7 @@ class AddfundsState extends State<Addfunds> {
             height: 40,
             child: Center(
               child: Text(
-                "R "+CurrentUser.funds,
+                "R " + CurrentUser.funds,
                 style: TextStyle(
                   color: Colors.blue[900],
                   fontWeight: FontWeight.bold,
@@ -115,35 +111,43 @@ class AddfundsState extends State<Addfunds> {
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Container(
             height: 400,
-            width: MediaQuery.of(context).size.width*0.5,
-
+            width: MediaQuery.of(context).size.width * 0.5,
             decoration: BoxDecoration(
               color: Colors.blue[900],
               borderRadius: BorderRadius.circular(15),
             ),
-
             child: Column(
               children: [
-                SizedBox(height: 10,),
-                Text("ADD FUNDS",
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "ADD FUNDS",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5,),
-                Text("Easiest way to add funds to your StuMarket account",
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "Easiest way to add funds to your StuMarket account",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
-                SizedBox(height: 25,),
+                SizedBox(
+                  height: 25,
+                ),
                 Container(
                   width: 250,
                   decoration: BoxDecoration(
@@ -158,20 +162,20 @@ class AddfundsState extends State<Addfunds> {
                         border: InputBorder.none,
                         hintText: "enter amount",
                         hintStyle: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white70,
-                            height: 1.5),
+                            fontSize: 15, color: Colors.white70, height: 1.5),
                       ),
                       obscureText: false,
                       style: TextStyle(
-                          fontSize: 22, color:  Colors.white70, height: 1.5),
+                          fontSize: 22, color: Colors.white70, height: 1.5),
                       keyboardType: TextInputType.number,
                     ),
                   ),
                 ),
-                SizedBox(height: 25,),
+                SizedBox(
+                  height: 25,
+                ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical:15, horizontal:0 ),
+                  margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
                   child: Container(
                     height: 60,
                     width: 250,
@@ -182,10 +186,9 @@ class AddfundsState extends State<Addfunds> {
                     child: TextButton(
                       key: Key("LoginButton"),
                       onPressed: () {
-                        if(isNumeric(amount.text)){
+                        if (isNumeric(amount.text)) {
                           addFunds(context);
-                        }
-                        else{
+                        } else {
                           Fluttertoast.showToast(
                             msg: "invalid input",
                             toastLength: Toast.LENGTH_SHORT,
@@ -196,12 +199,12 @@ class AddfundsState extends State<Addfunds> {
                       },
                       child: Text(
                         "ADD FUNDS",
-                        style:TextStyle(fontSize: 18, color: Colors.blue[900], height: 1.5),
+                        style: TextStyle(
+                            fontSize: 18, color: Colors.blue[900], height: 1.5),
                       ),
                     ),
                   ),
                 ),
-
               ],
             ),
           )

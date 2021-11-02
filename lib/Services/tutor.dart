@@ -207,12 +207,12 @@ Widget _buildCard(String id, String seller, String name, String price, bool adde
                                   )
                               ),
                               onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Rate()
-                                  ),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => Reviews()
+                                //   ),
+                                // );
                               },
                             ),
                             InkWell(

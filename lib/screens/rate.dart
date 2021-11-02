@@ -1,66 +1,148 @@
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:rating_dialog/rating_dialog.dart';
+import 'dart:convert';
 
-class Rate extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import 'package:kingpinssdp/current_user.dart';
+import 'package:kingpinssdp/products/books.dart';
+
+class Reviews extends StatefulWidget {
+  String? proId, proName, proPrice, proImage, proSeller;
+  Reviews(proId, proImage, proName, proPrice, proSeller) {
+    this.proId = proId;
+    this.proImage = proImage;
+    this.proName = proName;
+    this.proPrice = proPrice;
+    this.proSeller = proSeller;
+  }
+
   @override
-  _RateState createState() => _RateState();
+  _ReviewsState createState() =>
+      _ReviewsState(proId!, proImage!, proName!, proPrice!, proSeller!);
 }
 
-class _RateState extends State<Rate> {
+TextEditingController reply = TextEditingController();
+
+class _ReviewsState extends State<Reviews> {
+  String? proId, proName, proPrice, proImage, proSeller;
+  double rate = 3;
+  _ReviewsState(String proId, String proImage, String proName, String proPrice,
+      String proSeller) {
+    this.proId = proId;
+    this.proImage = proImage;
+    this.proName = proName;
+    this.proPrice = proPrice;
+    this.proSeller = proSeller;
+  }
+  Future<String> addToCart(String id, String seller) async {
+    String buyer = CurrentUser.email;
+    var url =
+        "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/add_to_cart.php?buyerEmail=$buyer&sellerEmail=$seller&productId=$id";
+    var response = await http.get(Uri.parse(url));
+    return response.body;
+  }
+
+  Future allPerson() async {
+    var url = "https://lamp.ms.wits.ac.za/home/s2280727/viewAll3.php";
+    var response = await http.post(Uri.parse(url), body: {
+      "productId": proId!,
+    });
+    return json.decode(response.body);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    allPerson();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal[50],
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text('Rating Dialog'),
-        automaticallyImplyLeading: false,
-      ),
-      body: Container(
-        child: Center(
-          child: MaterialButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-            color: Colors.cyan,
-            padding: EdgeInsets.only(left: 30,right: 30),
-            child: Text('Rate',style: TextStyle
-              (color: Colors.white,fontSize: 15),
-            ),
-            onPressed: _showRatingDialog,
-          ),
+        appBar: AppBar(
+          title: Text(proName!),
         ),
-      ),
-    );
+        body: ListView(children: [
+          Hero(
+              tag: proImage!,
+              child: Image.network(proImage!,
+                  height: 250.0, width: 200.0, fit: BoxFit.contain)),
+          SizedBox(height: 20.0),
+          Center(
+              child: Text(proPrice!,
+                  style: TextStyle(
+                      fontFamily: 'Varela',
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue))),
+          SizedBox(height: 10.0),
+          Center(
+            child: Text(proName!,
+                style: TextStyle(
+                    color: Colors.blue, fontFamily: 'Varela', fontSize: 24.0)),
+          ),
+          TextButton(
+            child: const Text('Add To Cart'),
+            onPressed: () {
+              //print(proId!);
+              print(rate);
+              addToCart(proId!, proSeller!).then((value) =>
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(value))));
+            },
+          ),
+          SizedBox(height: 20.0),
+          FutureBuilder(
+            future: allPerson(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasError) print(snapshot.error);
+              int i = 0;
+              return snapshot.hasData
+                  ? GridView.builder(
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        childAspectRatio: (1 / 0.1),
+                      ),
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        List list = snapshot.data;
+                        for (int i = 0; i < snapshot.data.length; i++) {
+                          rate += double.parse(list[i]['RATING']);
+                        }
+                        rate = snapshot.data.length;
 
+                        return Card(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              ListTile(
+                                leading: Icon(Icons.album),
+                                title: Text(list[index]['buyer']),
+                                subtitle: Text(list[index]['COMMENT']),
+                              ),
+                            ],
+                          ),
+                        );
+                      })
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    );
+            },
+          ),
+          Center(
+              child: RatingBarIndicator(
+            rating: rate,
+            itemBuilder: (context, index) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            itemCount: 5,
+            itemSize: 50.0,
+            //direction: Axis.horizontal,
+          )),
+        ]));
   }
-
-  void _showRatingDialog() {
-    final _ratingDialog = RatingDialog(
-      ratingColor: Colors.amber,
-      title: 'Rating this Service/Product',
-      message: 'Rating this Product/ Service and tell others what you think.'
-          ' Add more description here if you want.',
-      submitButton: 'Submit',
-      onCancelled: () => print('cancelled'),
-      onSubmitted: (response) {
-        print('rating: ${response.rating}, '
-            'comment: ${response.comment}');
-
-        if (response.rating < 3.0) {
-          print('response.rating: ${response.rating}');
-        } else {
-          Container();
-        }
-      },
-    );
-
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (context) => _ratingDialog,
-    );
-  }
-
 }
