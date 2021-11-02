@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:flutter/material.dart';
@@ -17,22 +18,23 @@ class ReceiptPage extends StatefulWidget{
   ReceiptPageState createState() => ReceiptPageState();
 }
 
-Future review(String comment, String seller, int productId, int rate) async{
+Future review(String message, String receiver, String proId, String rate) async{
   String buyer = CurrentUser.email;
   var url =
       "https://lamp.ms.wits.ac.za/home/s2280727/kingpins/review.php";
   var response = await http.post(Uri.parse(url), body: {
     "buyer": buyer,
-    "review": review,
-    "seller": seller,
-    "id": productId,
+    "review": message,
+    "seller": receiver,
+    "id": proId,
     "rate": rate,
   });
   print(response.body);
 }
+TextEditingController textReview= TextEditingController();
 
 class ReceiptPageState extends State<ReceiptPage>{
-
+  double rating=0;
   List data = [];
   double totalDue = 0;
   @override
@@ -42,82 +44,111 @@ class ReceiptPageState extends State<ReceiptPage>{
     totalDue = widget.totalDue;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-              title: Text('Transaction Complete.     Total = R $totalDue'),
-          ),
-          body: ListView.builder(
-                  physics: ScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.grey[200],
-                      ),
-                      padding: EdgeInsets.only(right: 20.0, left: 20.0, top: 10.0, bottom: 10.0),
-                      margin: EdgeInsets.only(right: 10.0, left: 10.0, top: 5.0, bottom: 5.0),
-                      width: MediaQuery.of(context).size.width*0.85,
-                      height: MediaQuery.of(context).size.height/10,
-                      //child: getRow(data[index]["description"], data[index]["price"]),
-                      child: Row(
-                        children: [
-                          Text(data[index]["description"]+",",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          Text(data[index]["price"],
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          SizedBox(width: MediaQuery.of(context).size.width*0.25,),
-                          FlatButton(onPressed: (){
-                            _showRatingDialog(data[index]['seller'],data[index]['id'],);
-                          },
-                              child: Text("review",
-                                style: TextStyle(
-                                  color: Colors.blue
+      appBar: AppBar(
+        title: Text('Transaction Complete.     Total = R $totalDue'),
+      ),
+      body: ListView.builder(
+          physics: ScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Colors.grey[200],
+              ),
+              padding: EdgeInsets.only(right: 20.0, left: 20.0, top: 10.0, bottom: 10.0),
+              margin: EdgeInsets.only(right: 10.0, left: 10.0, top: 5.0, bottom: 5.0),
+              width: MediaQuery.of(context).size.width*0.85,
+              height: MediaQuery.of(context).size.height/10,
+              //child: getRow(data[index]["description"], data[index]["price"]),
+              child: Row(
+                children: [
+                  Text(data[index]["description"]+",",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(data[index]["price"],
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(width: MediaQuery.of(context).size.width*0.25,),
+                  FlatButton(onPressed: (){
+                    showDialog(context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Review the product/Service"),
+
+                            content: Column(
+                              children: [
+                                RatingBar.builder(
+                                    minRating: 1,
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating){
+                                      this.rating= rating;
+                                    }
                                 ),
-                              ),
-                          ),
-                        ],
+                                SizedBox(height: 32,),
+                                TextField(
+                                  controller: textReview,
+                                  decoration: InputDecoration(
+                                    hintText: "write your review",
+
+                                  ),
+                                ),
+                                SizedBox(height: 32,),
+                              ],
+                            ),
+
+                            actions: [
+                              FlatButton(onPressed: (){
+                                Navigator.pop(context);
+                              },
+                                  child: Text("Cancel")),
+                              FlatButton(onPressed: (){
+                                if(textReview.text==""){
+                                  Fluttertoast.showToast(
+                                    msg: "please write your review",
+                                    toastLength: Toast.LENGTH_LONG,
+                                    gravity: ToastGravity.CENTER,
+                                    fontSize: 16.0,
+                                  );
+                                }
+                                else{
+                                  review(textReview.text,data[index]["seller"],(data[index]["id"]),rating.toString());
+                                  Fluttertoast.showToast(
+                                    msg: "success",
+                                    toastLength: Toast.LENGTH_LONG,
+                                    gravity: ToastGravity.CENTER,
+                                    fontSize: 16.0,
+                                  );
+                                }
+
+                              },
+                                  child: Text("Submit"))
+                            ],
+                          );
+                        });
+                  },
+                    child: Text("review",
+                      style: TextStyle(
+                          color: Colors.blue
                       ),
-                    );
-                  }),
-        );
-  }
-
-  void _showRatingDialog(String seller, int id) {
-    final _ratingDialog = RatingDialog(
-      ratingColor: Colors.amber,
-      title: 'Rating this Service/Product',
-      message: 'Rating this Product/ Service and tell others what you think.'
-          ' Add more description here if you want.',
-      submitButton: 'Submit',
-      onCancelled: () => print('cancelled'),
-      onSubmitted: (response) {
-        review("hi","me@gmai.com",77,2);
-
-        /*print('rating: ${response.rating}, '
-            'comment: ${response.comment}');
-
-        if (response.rating < 3.0) {
-          print('response.rating: ${response.rating}');
-        } else {
-          Container();
-        }*/
-      },
-    );
-
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (context) => _ratingDialog,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
     );
   }
 
@@ -125,8 +156,11 @@ class ReceiptPageState extends State<ReceiptPage>{
 
 Widget getRow(String name, String price){
   return Text("$name, R $price",
-              style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'Varela',
-                    fontSize: 20.0));
+      style: TextStyle(
+          color: Colors.black,
+          fontFamily: 'Varela',
+          fontSize: 20.0));
 }
+
+
+

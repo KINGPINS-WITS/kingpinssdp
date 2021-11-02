@@ -157,7 +157,7 @@ class ProfilePageState extends State<ProfilePage> {
                                       //     builder: (context) =>
                                       //         DemoUploadImage(),
                                       //   ),
-                                      // );
+                                      //);
                                     },
                                     child: Text('Upload an add'),
                                   ),
