@@ -8,6 +8,7 @@ import 'dart:async';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:kingpinssdp/current_user.dart';
 import 'package:kingpinssdp/signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../homepage.dart';
 import 'add_funds.dart';
@@ -25,7 +26,13 @@ Future<String> login(String email, String password, http.Client client) async {
   final res = await client.post(
     Uri.parse(url),
     );
-  
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var savedEmail = prefs.getString('email');
+  if(savedEmail==email){
+    return "Successful";
+  }
+
   var response = res.body;
   if(response != "Invalid login details!"){
     var userDetails = jsonDecode(response);
@@ -183,9 +190,15 @@ class LoginPageState extends State<LoginPage>{
                                 key: Key("LoginButton"),
                                 onPressed: () {
                                   if(formkey.currentState!.validate()){
-                                    login(emailController.text, passwordController.text, http.Client()).then((value){
+                                    login(emailController.text, passwordController.text, http.Client()).then((value) async{
                                       if(value == "Successful"){
                                         // goto homepage
+                                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                                        prefs.setString('email', CurrentUser.email);
+                                        prefs.setString('lastname', CurrentUser.lastName);
+                                        prefs.setString('firstname', CurrentUser.firstName);
+                                        prefs.setString('funds', CurrentUser.funds);
+                                        prefs.setString('image', CurrentUser.image);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
